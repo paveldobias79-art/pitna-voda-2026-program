@@ -492,14 +492,80 @@ tr:last-child td { border-bottom: none; }
 }
 
 /* ─────────────────────────────────────────────
-   RESPONSIVE
+   RESPONSIVE — Tablet (max 900px)
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .conf-title { letter-spacing: -0.5px; }
+  .days-container { padding: 0 12px 60px; }
+  .legend { padding: 0 12px; }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Tablet malý / velký telefon (max 768px)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .site-header { padding: 40px 16px 36px; }
+  .cell-time    { width: 88px; min-width: 80px; font-size: 11.5px; }
+  .cell-content { font-size: 13px; }
+  .pres-authors { font-size: 11px; }
+  .tab          { padding: 0 16px; }
+  .conf-badges  { gap: 7px; }
+  .badge,
+  span.badge-inactive {
+    font-size: 10px;
+    padding: 4px 10px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Mobil (max 600px)
 ───────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .cell-time    { width: 76px; min-width: 72px; font-size: 11px; }
+  .topbar-label { display: none; }
+  .site-header  { padding: 32px 14px 28px; }
+
+  /* Tabulka s horizontálním scrollem jako záloha */
+  .day-panel    { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .program-table{ min-width: 420px; }
+
+  .cell-time    { width: 72px; min-width: 68px; font-size: 10.5px; padding-right: 8px; }
   .cell-content { font-size: 12.5px; }
-  .pres-authors { font-size: 11px; }
-  .tab { padding: 0 13px; font-size: 12px; }
-  .conf-badges  { display: none; }
+  .pres-authors { font-size: 10.5px; }
+  .pres-tag     { font-size: 9px; padding: 2px 5px; }
+
+  .tab          { padding: 0 11px; font-size: 12px; height: 52px; }
+  .tab .day-date{ font-size: 9.5px; }
+
+  /* Badges — zmenšit a zalamovat místo skrývání */
+  .conf-badges  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .badge,
+  span.badge-inactive {
+    font-size: 9.5px;
+    padding: 4px 9px;
+    letter-spacing: 0.4px;
+  }
+
+  .legend       { gap: 7px; }
+  .legend-item  { font-size: 11px; }
+  .disclaimer   { font-size: 11px; padding: 0 12px; }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Malý mobil (max 380px)
+───────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .conf-title   { letter-spacing: -0.5px; }
+  .cell-time    { width: 60px; min-width: 56px; font-size: 10px; }
+  .tab          { padding: 0 9px; font-size: 11.5px; }
+  .badge,
+  span.badge-inactive { font-size: 9px; padding: 3px 8px; }
 }
 </style>
 </head>
@@ -508,7 +574,7 @@ tr:last-child td { border-bottom: none; }
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a class="topbar-back" href="https://konference-pitnavoda.cz" target="_blank">
+    <a class="topbar-back" href="https://konference-pitnavoda.cz" target="_blank" rel="noopener noreferrer">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"/>
       </svg>
@@ -525,12 +591,12 @@ tr:last-child td { border-bottom: none; }
     <h1 class="conf-title">Pitná voda <span>2026</span></h1>
     <p class="conf-meta">1.–4. června 2026 &nbsp;·&nbsp; Hotel Palcát, Tábor</p>
     <p class="conf-meta" style="font-size:13.5px; margin-top:6px; color:rgba(255,255,255,0.55);">
-      Odborní garanti: doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team) &nbsp;|&nbsp; Ing. Pavel Dobiáš, Ph.D. (ENVI-PUR, s.r.o.)
+      Odborní garanti: doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team České Budějovice) &nbsp;|&nbsp; Ing. Pavel Dobiáš, Ph.D. (ENVI-PUR, s.r.o.)
     </p>
     <p class="conf-org">Pořadatelé: ENVI-PUR, s.r.o. a W&amp;ET Team České Budějovice</p>
     <div class="conf-badges">
-      <a class="badge" href="https://www.czwa.cz" target="_blank" rel="noopener">Odborná záštita CzWA</a>
-      <a class="badge" href="https://www.sovak.cz" target="_blank" rel="noopener">Odborná záštita SOVAK ČR</a>
+      <a class="badge" href="https://www.czwa.cz" target="_blank" rel="noopener noreferrer">Odborná záštita CzWA</a>
+      <a class="badge" href="https://www.sovak.cz" target="_blank" rel="noopener noreferrer">Odborná záštita SOVAK ČR</a>
       <span class="badge-inactive">Elektronický sborník příspěvků</span>
     </div>
   </div>
@@ -844,7 +910,7 @@ tr:last-child td { border-bottom: none; }
   ENVI-PUR, s.r.o. &nbsp;|&nbsp; W&amp;ET Team České Budějovice<br>
   <a href="mailto:konference@envi-pur.cz">konference@envi-pur.cz</a>
   &nbsp;|&nbsp;
-  <a href="https://www.konference-pitnavoda.cz" target="_blank">www.konference-pitnavoda.cz</a>
+  <a href="https://www.konference-pitnavoda.cz" target="_blank" rel="noopener noreferrer">www.konference-pitnavoda.cz</a>
 </footer>
 
 <script>
