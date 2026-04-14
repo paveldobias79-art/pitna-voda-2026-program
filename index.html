@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program konference — Pitná voda 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #1A3660;
+  --navy-dark: #0f2040;
+  --navy-mid:  #2B4E8C;
+  --cyan:      #0BAAD4;
+  --cyan-lt:   #D0EEF8;
+  --blue-lt:   #E2EAF7;
+  --green:     #C3EAAE;
+  --peach:     #FAE4D6;
+  --pink:      #F4D0EC;
+  --white:     #FFFFFF;
+  --bg:        #F0F4FA;
+  --text:      #192035;
+  --muted:     #5A6A85;
+  --border:    #D8E2EF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ─────────────────────────────────────────────
+   TOP BAR  (zpět na web konference)
+───────────────────────────────────────────── */
+.topbar {
+  background: var(--navy-dark);
+  padding: 0 24px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.topbar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color .2s;
+}
+.topbar-back:hover { color: var(--cyan); }
+.topbar-back svg { flex-shrink: 0; }
+.topbar-label {
+  color: rgba(255,255,255,0.35);
+  font-size: 11.5px;
+  font-family: "Outfit", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* ─────────────────────────────────────────────
+   HERO HEADER
+───────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(160deg, var(--navy) 0%, #162e58 55%, #0e2245 100%);
+  color: white;
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle water texture overlay */
+.site-header::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 130%, rgba(11,170,212,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 15% 20%, rgba(255,255,255,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 85% 30%, rgba(255,255,255,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Animated water circles */
+.site-header::after {
+  content: "";
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(11,170,212,0.08);
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1);   opacity: 0.6; }
+  50%       { transform: translate(-50%,-50%) scale(1.15); opacity: 0.2; }
+}
+
+.header-inner {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.conf-eyebrow {
+  font-family: "Outfit", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.conf-eyebrow::before, .conf-eyebrow::after {
+  content: "";
+  flex: 1; max-width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(11,170,212,0.5), transparent);
+}
+.conf-title {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(32px, 6vw, 58px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+.conf-title span { color: var(--cyan); }
+.conf-meta {
+  font-size: 15.5px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+.conf-org {
+  font-size: 12px;
+  color: rgba(255,255,255,0.42);
+  margin-top: 18px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+.conf-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-family: "Outfit", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+}
+
+/* Wave divider */
+.wave-bottom {
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 36px; overflow: hidden;
+}
+.wave-bottom svg { width: 100%; height: 100%; display: block; }
+
+/* ─────────────────────────────────────────────
+   STICKY DAY TABS
+───────────────────────────────────────────── */
+.tabs-wrap {
+  background: white;
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(26,54,96,0.10);
+}
+.tabs {
+  display: flex;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+  position: relative;
+  top: 2px;
+  transition: color .2s, border-color .2s;
+}
+.tab .day-name { font-size: 13px; }
+.tab .day-date { font-size: 10px; font-weight: 400; opacity: 0.65; margin-top: 2px; }
+.tab:hover { color: var(--navy-mid); }
+.tab.active { color: var(--navy); border-bottom-color: var(--cyan); }
+
+/* ─────────────────────────────────────────────
+   LEGEND
+───────────────────────────────────────────── */
+.legend {
+  max-width: 960px;
+  margin: 18px auto 0;
+  padding: 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ─────────────────────────────────────────────
+   DAY PANELS
+───────────────────────────────────────────── */
+.days-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px 72px;
+}
+.day-panel { display: none; animation: fadeUp .25s ease; }
+.day-panel.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   PROGRAM TABLE
+───────────────────────────────────────────── */
+.program-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 24px rgba(26,54,96,0.10);
+}
+
+/* Day header */
+.row-day td {
+  background: var(--navy);
+  color: white;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.5px;
+  padding: 14px 18px;
+}
+.row-day .cell-time {
+  color: rgba(255,255,255,0.45);
+  font-size: 10px;
+  text-align: center;
+}
+
+/* Section header */
+.row-section td {
+  background: var(--blue-lt);
+  color: var(--navy);
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 9px 18px;
+}
+.row-section td.cell-time { background: var(--blue-lt); }
+
+/* Keynote */
+.row-keynote td { background: var(--cyan-lt); padding: 13px 18px; }
+.row-keynote .cell-time { text-align: center; vertical-align: middle; }
+
+/* Regular presentation */
+.row-pres td { background: white; padding: 11px 18px; }
+.row-pres:hover td { background: #EEF4FF; transition: background .15s; cursor: default; }
+
+/* Company presentation */
+.row-firmy td { background: var(--peach); padding: 11px 18px; }
+
+/* Green / discussion rows */
+.row-green td  { background: var(--green); padding: 11px 18px; }
+.row-bdisc td  { background: var(--green); padding: 9px 18px; }
+
+/* Lunch */
+.row-lunch td { background: var(--pink); padding: 9px 18px; }
+
+/* Utility (registration, zahájení, evening) */
+.row-util  td { background: white; padding: 9px 18px; }
+.row-kdisc td { background: white; padding: 9px 18px; }
+
+/* Cell base */
+td {
+  border-bottom: 1px solid rgba(0,0,0,0.045);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+
+.cell-time {
+  width: 106px;
+  min-width: 96px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navy);
+  padding-right: 12px;
+  white-space: nowrap;
+  font-family: "Outfit", sans-serif;
+  vertical-align: middle;
+  text-align: center;
+}
+.cell-content { font-size: 13.5px; line-height: 1.45; }
+
+.pres-title  { font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.pres-authors {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.pres-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-right: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.tag-keynote { background: var(--cyan);  color: white; }
+.tag-firmy   { background: #C96830; color: white; }
+
+.disc-label   { font-weight: 600; color: #246B15; font-style: italic; font-size: 13px; }
+.disc-kdisc   { color: var(--navy); font-style: italic; font-weight: 500; font-size: 13px; }
+.util-label   { font-style: italic; font-weight: 500; color: var(--muted); font-size: 13px; }
+.lunch-label  { font-style: italic; font-weight: 600; color: #922870; font-size: 13px; }
+.evening-label{ font-style: italic; font-weight: 600; color: var(--navy); font-size: 13px; }
+
+/* ─────────────────────────────────────────────
+   DISCLAIMER + FOOTER
+───────────────────────────────────────────── */
+.disclaimer {
+  max-width: 960px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+}
+
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 12px;
+  line-height: 1.9;
+  margin-top: 48px;
+}
+.site-footer a {
+  color: var(--cyan);
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.site-footer a:hover { opacity: 0.8; }
+.footer-logo {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.footer-logo-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  opacity: 0.5;
+}
+.footer-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .cell-time    { width: 76px; min-width: 72px; font-size: 11px; }
+  .cell-content { font-size: 12.5px; }
+  .pres-authors { font-size: 11px; }
+  .tab { padding: 0 13px; font-size: 12px; }
+  .conf-badges  { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-back" href="https://konference-pitnavoda.cz" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      konference-pitnavoda.cz
+    </a>
+    <span class="topbar-label">PROGRAM KONFERENCE</span>
+  </div>
+</div>
+
+<!-- HERO HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <p class="conf-eyebrow">18. ročník · mezinárodní odborná konference</p>
+    <h1 class="conf-title">Pitná voda <span>2026</span></h1>
+    <p class="conf-meta">1.–4. června 2026 &nbsp;·&nbsp; Hotel Palcát, Tábor</p>
+    <p class="conf-meta" style="font-size:13.5px; margin-top:6px; color:rgba(255,255,255,0.55);">
+      Odborní garanti: doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team) &nbsp;|&nbsp; Ing. Pavel Dobiáš, Ph.D. (ENVI-PUR)
+    </p>
+    <p class="conf-org">Pořadatelé: ENVI-PUR, s.r.o. a W&amp;ET Team České Budějovice</p>
+    <div class="conf-badges">
+      <span class="badge">Odborná záštita CzWA</span>
+      <span class="badge">Odborná záštita SOVAK ČR</span>
+      <span class="badge">Elektronický sborník příspěvků</span>
+    </div>
+  </div>
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 36" preserveAspectRatio="none" fill="var(--bg)">
+      <path d="M0,18 C200,36 400,0 600,18 C800,36 1000,2 1200,18 C1320,28 1380,12 1440,18 L1440,36 L0,36 Z"/>
+    </svg>
+  </div>
+</header>
+
+<!-- STICKY TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab" onclick="showDay(0)" id="tab0">
+      <span class="day-name">Pondělí</span><span class="day-date">1. 6.</span>
+    </button>
+    <button class="tab active" onclick="showDay(1)" id="tab1">
+      <span class="day-name">Úterý</span><span class="day-date">2. 6.</span>
+    </button>
+    <button class="tab" onclick="showDay(2)" id="tab2">
+      <span class="day-name">Středa</span><span class="day-date">3. 6.</span>
+    </button>
+    <button class="tab" onclick="showDay(3)" id="tab3">
+      <span class="day-name">Čtvrtek</span><span class="day-date">4. 6.</span>
+    </button>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--cyan-lt)"></div>Zvaná přednáška</div>
+  <div class="legend-item"><div class="legend-dot" style="background:white;border-color:var(--border)"></div>Odborná přednáška</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--peach)"></div>Firemní prezentace</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Diskuse / speciální blok</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--pink)"></div>Oběd</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PROGRAM CONTENT
+═══════════════════════════════════════════════ -->
+<div class="days-container">
+
+<!-- ══════════ PONDĚLÍ ══════════ -->
+<div class="day-panel" id="day0">
+<table class="program-table">
+<tr class="row-day"><td class="cell-time"></td><td>PONDĚLÍ&ensp;1. 6. 2026&ensp;—&ensp;Neformální zahájení konference</td></tr>
+<tr class="row-util"><td class="cell-time">15:00</td><td class="cell-content"><span class="util-label">Registrace účastníků</span></td></tr>
+<tr class="row-keynote"><td class="cell-time">17:00–17:45</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Adaptace vodárenství na měnící se svět</div>
+  <div class="pres-authors">Ing. Vilém Žák (SOVAK ČR)</div>
+</td></tr>
+<tr class="row-util"><td class="cell-time">17:45–18:15</td><td class="cell-content"><span class="util-label">Diskuse k tématu přednášky</span></td></tr>
+</table>
+</div>
+
+<!-- ══════════ ÚTERÝ ══════════ -->
+<div class="day-panel active" id="day1">
+<table class="program-table">
+<tr class="row-day"><td class="cell-time"></td><td>ÚTERÝ&ensp;2. 6. 2026&ensp;—&ensp;1. den konference</td></tr>
+<tr class="row-util"><td class="cell-time">8:00</td><td class="cell-content"><span class="util-label">Registrace účastníků</span></td></tr>
+<tr class="row-util"><td class="cell-time">9:00–9:30</td><td class="cell-content"><span class="util-label">Slavnostní zahájení konference</span></td></tr>
+<tr class="row-keynote"><td class="cell-time">9:30–10:20</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Koagulace při úpravě vod — 50 let výzkumu pro praxi</div>
+  <div class="pres-authors">doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team České Budějovice)</div>
+</td></tr>
+<tr class="row-kdisc"><td class="cell-time">10:20–10:30</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Strategický rámec&ensp;|&ensp;Resilience&ensp;|&ensp;Legislativa</td></tr>
+<tr class="row-pres"><td class="cell-time">10:30–10:45</td><td class="cell-content">
+  <div class="pres-title">Mělo smysl dělat rizikové analýzy vodovodů?</div>
+  <div class="pres-authors">Ing. Petra Pašková, Ph.D., Mgr. Jiří Paul (VAK Beroun, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:45–11:00</td><td class="cell-content">
+  <div class="pres-title">Řešení největší ekologické havárie v historii Znojemska optikou provozovatele</div>
+  <div class="pres-authors">Ing. Antonín Stuhl, Ing. Lenka Hahn, Ing. Tomáš Juhaňák (VAS, a.s. / Povodí Moravy, s.p.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">11:00–11:15</td><td class="cell-content">
+  <div class="pres-title">Preventivní posílení vodárenské infrastruktury — diagnostika odstavených zdrojů, ÚV Machnín</div>
+  <div class="pres-authors">Ing. David Janák, Ing. Lukáš Pařízek, MBA, Jaroslav Cebula DiS. (Severočeská servisní a.s. / SČVK, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">11:15–11:30</td><td class="cell-content">
+  <div class="pres-title">Význam ÚV Podolí ve výhledu do roku 2050 pro Prahu a metropolitní oblast</div>
+  <div class="pres-authors">Ing. Jindřich Šesták (PVS, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">11:30–11:45</td><td class="cell-content">
+  <div class="pres-title">Vodovod Soběnov — 20 let provozu s dezinfekcí vody pouze UV zářením</div>
+  <div class="pres-authors">Ing. Jiří Stara, Ing. Lenka Slancová, doc. Ing. Petr Dolejš, CSc. (ČEVAK a.s. / W&amp;ET Team České Budějovice)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">11:45–12:00</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-lunch"><td class="cell-time">12:00–13:30</td><td class="cell-content"><span class="lunch-label">Oběd</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Aktivní uhlí v technologii úpravy vody</td></tr>
+<tr class="row-pres"><td class="cell-time">13:30–13:45</td><td class="cell-content">
+  <div class="pres-title">Vlastnosti GAU a metody jejich hodnocení</div>
+  <div class="pres-authors">Ing. Mgr. M. Švábová, Ph.D. (AV ČR / Dekonta / VŠCHT Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">13:45–14:00</td><td class="cell-content">
+  <div class="pres-title">Poloprovozní testy odstraňování mikropolutantů na reaktivovaném GAU — ÚV Káraný</div>
+  <div class="pres-authors">doc. Ing. Marek Šváb, Ph.D. (Dekonta / AV ČR / VŠCHT Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">14:00–14:15</td><td class="cell-content">
+  <div class="pres-title">Vliv dávkování PAU na účinnost odkyselovací filtrace</div>
+  <div class="pres-authors">Ing. Viktor Novotný (CHEVAK Cheb, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">14:15–14:30</td><td class="cell-content">
+  <div class="pres-title">Reaktivace GAU — změna paradigmatu v českém vodárenství?</div>
+  <div class="pres-authors">Ing. Adam Fendrych, Ing. Lukáš Havránek (VAK Pardubice, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">14:30–14:45</td><td class="cell-content">
+  <div class="pres-title">Poloprovozní testování GAU pro ÚV Plzeň</div>
+  <div class="pres-authors">Ing. Lukáš Kačírek, Ing. Martina Klimtová, Ph.D., Ing. Pavel Dobiáš, Ph.D., doc. Ing. Petr Dolejš, CSc. (VODÁRNA PLZEŇ a.s. / W&amp;ET Team České Budějovice)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">14:45–15:00</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-firmy"><td class="cell-time">15:00–15:10</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Technologie pro budoucnost pitné vody</div>
+  <div class="pres-authors">Ing. Ladislav Žilík — Endress+Hauser Czech</div>
+</td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Technologie úpravy vody — nové poznatky a postupy</td></tr>
+<tr class="row-pres"><td class="cell-time">15:10–15:25</td><td class="cell-content">
+  <div class="pres-title">Hydrodynamika v průtočném modelovém flokulačním kanále s mechanickým mícháním</div>
+  <div class="pres-authors">doc. Ing. Radek Šulc, Ph.D., prof. Ing. Tomáš Jirout, Ph.D., Ing. Jiří Moravec, Ph.D., Ing. Filip Randák (ČVUT Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:25–15:40</td><td class="cell-content">
+  <div class="pres-title">Vliv míchání flokulačního kanálu na filtrační cyklus</div>
+  <div class="pres-authors">Ing. Eva Riederová, Ing. Linda Krunert, Ing. Petr Pěkný, Ing. Matěj Vrzáček (Želivská provozní, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:40–15:55</td><td class="cell-content">
+  <div class="pres-title">Využití AI pro predikci výsledků koagulačního experimentu</div>
+  <div class="pres-authors">Ing. Michal Kuchař, Ing. Cyril Oswald, Ph.D., prof. Ing. Tomáš Vyhlídal, Ph.D. (ČVUT Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:55–16:10</td><td class="cell-content">
+  <div class="pres-title">Provozní zkušenosti včetně nových postupů na ÚV Mariánské Lázně</div>
+  <div class="pres-authors">Jiří Růžička, DiS. (CHEVAK Cheb, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">16:10–16:25</td><td class="cell-content">
+  <div class="pres-title">Postačuje prostá filtrace přes vápenec/dolomit ke zvýšení Ca a Mg v pitné vodě?</div>
+  <div class="pres-authors">prof. Ing. Václav Janda, CSc., doc. Ing. Marek Šváb, CSc., prof. Ing. Ondřej Šráček, M.Sc., Ph.D. (VŠCHT Praha / Dekonta / PF Univerzita Palackého v Olomouci)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">16:25–16:40</td><td class="cell-content">
+  <div class="pres-title">Využitie ultrafiltrácie v úprave vody</div>
+  <div class="pres-authors">prof. Ing. Ján Ilavský, Ph.D., prof. Ing. Danka Barloková, Ph.D., Ing. Michal Prosňanský, Ph.D., Ing. Mikuláš Krescanko (STU Bratislava / PRAKTIKPUMP / ProMinent)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">16:40–16:55</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-firmy"><td class="cell-time">16:55–17:05</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Monitorovacie systémy ECM s využitím sond Badger Meter pre úpravne pitnej vody</div>
+  <div class="pres-authors">ECM ECO Monitoring</div>
+</td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Společenský večer</td></tr>
+<tr class="row-util"><td class="cell-time">19:30–24:00</td><td class="cell-content"><span class="evening-label">Společenský večer s rautem a hudbou</span></td></tr>
+</table>
+</div>
+
+<!-- ══════════ STŘEDA ══════════ -->
+<div class="day-panel" id="day2">
+<table class="program-table">
+<tr class="row-day"><td class="cell-time"></td><td>STŘEDA&ensp;3. 6. 2026&ensp;—&ensp;2. den konference</td></tr>
+<tr class="row-keynote"><td class="cell-time">8:30–9:10</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Hydrochemie úpravy vody: tradiční principy a nové výzvy</div>
+  <div class="pres-authors">doc. RNDr. Martin Pivokonský, Ph.D. (Hydrologický ústav AV ČR / Floc4U)</div>
+</td></tr>
+<tr class="row-kdisc"><td class="cell-time">9:10–9:20</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Membránové technologie a nové postupy řízení procesů</td></tr>
+<tr class="row-pres"><td class="cell-time">9:20–9:35</td><td class="cell-content">
+  <div class="pres-title">Přímá nanofiltrace (DNF) a její technologický potenciál</div>
+  <div class="pres-authors">Ing. Tomáš Němec (ENVI-PUR, s.r.o.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">9:35–9:50</td><td class="cell-content">
+  <div class="pres-title">Posouzení účinnosti nanofiltrace při odstraňování organických látek a prekurzorů THM</div>
+  <div class="pres-authors">Ing. Robert Kvaček, prof. Ing. Václav Janda, CSc., Ing. Zuzana Sýkorová, Ph.D. (VŠCHT Praha / PVK, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">9:50–10:05</td><td class="cell-content">
+  <div class="pres-title">Koagulační testy pro návrh podmínek in-line koagulace na keramické membráně</div>
+  <div class="pres-authors">Ing. Martina Martinková, Bc. Eliška Kubová, Ing. Jindřich Procházka, Ph.D., doc. Ing. Petr Porcal, Ph.D., Ing. Lucie Pokorná, Ph.D. (VŠCHT Praha / Hydrobiologický ústav, Biologické centrum AV ČR)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:05–10:20</td><td class="cell-content">
+  <div class="pres-title">Využití dat a algoritmů pro inteligentní řízení procesů úpravy vody (projekt MESES)</div>
+  <div class="pres-authors">Ing. Jindřich Procházka, Ph.D. (AquIQ / VŠCHT Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:20–10:35</td><td class="cell-content">
+  <div class="pres-title">Mechanismy zanášení membrán při opětovném využití vody</div>
+  <div class="pres-authors">Ing. Jan Vespalec, Mgr. Martina Repková, Ph.D., Ing. Silvestr Figalla, Ph.D., Ing. Jaroslav Lev, Ph.D., doc. Ing. Pavel Krystyník, Ph.D. (VUT FCH v Brně / ASIO TECH / UJEP Ústí n. L.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:35–10:50</td><td class="cell-content">
+  <div class="pres-title">Recyklace pracích vod na ÚV U Svaté Trojice — pilotní jednotka se SiC membránou</div>
+  <div class="pres-authors">Ing. Ladislava Hatáková, Ing. Martin Bouša (VHS Vrchlice–Maleč, a.s. / Water Carbon s.r.o.)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">10:50–11:05</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-lunch"><td class="cell-time">11:00–12:30</td><td class="cell-content"><span class="lunch-label">Oběd</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Hygiena a krizové řízení</td></tr>
+<tr class="row-green"><td class="cell-time">12:30–12:45</td><td class="cell-content">
+  <div class="pres-title">Když se natírá vodojem a je z toho vzbouření na vsi — pohled hygieniků na kontaminaci pitné vody v Holubicích</div>
+  <div class="pres-authors">Mgr. Hana Štollová, Mgr. Eva Kremeníková, Lenka Pokorná DiS., MUDr. František Kožíšek, CSc., Ing. Lenka Mayerová, Ph.D. (KHS Středočeský kraj / SZÚ Praha)</div>
+</td></tr>
+<tr class="row-green"><td class="cell-time">12:45–12:57</td><td class="cell-content">
+  <div class="pres-title">Kontaminace vodovodu Holubice–Holubí Háj pohledem provozovatele</div>
+  <div class="pres-authors">Ing. Tomáš Hloušek, Ph.D. (Středočeské vodárny, a.s.)</div>
+</td></tr>
+<tr class="row-green"><td class="cell-time">12:57–13:30</td><td class="cell-content"><span class="disc-label">Ad-hoc diskuse</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Mikrobiologie</td></tr>
+<tr class="row-pres"><td class="cell-time">13:30–13:45</td><td class="cell-content">
+  <div class="pres-title">Stanovení legionel … aneb každé vyšetření musí mít svůj účel</div>
+  <div class="pres-authors">RNDr. Dana Baudišová, Ph.D., MUDr. František Kožíšek, CSc. (SZÚ Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">13:45–14:00</td><td class="cell-content">
+  <div class="pres-title">Monitoring nukleových kyselin patogenních virů v povrchových vodách a procesech úpravy</div>
+  <div class="pres-authors">Ing. Anna Košinová, Bc. Margita Řezáčová, Ing. Robert Kvaček, doc. RNDr. Jana Říhová Ambrožová, Ph.D., Dr. Ing. Pavla Šmejkalová, prof. Ing. Václav Janda, CSc., Ing. Kamila Zdeňková, Ph.D., Ing. Vojtěch Kouba, Ph.D. (VŠCHT Praha / PVK, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">14:00–14:15</td><td class="cell-content">
+  <div class="pres-title">Antimikrobiální rezistence (AMR) na úpravnách vody a distribučních sítích</div>
+  <div class="pres-authors">Ing. Vojtěch Kouba, Ph.D., Ing. Marco Antonio Lopez Marin, Ph.D., Ing. Abhijeet Udnoor, Ing. Robert Kvaček, James Manu MSc., Ing. Lucie Baumruková, Bc. Kateřina Hlaváčková, Ing. Stanislav Gajdoš, Ing. Zuzana Sýkorová, Ph.D., Dr. Ing. Pavla Šmejkalová, prof. Ing. Václav Janda, CSc., doc. RNDr. Jana Říhová Ambrožová, Ph.D. (VŠCHT Praha)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">14:15–14:30</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Mikropolutanty</td></tr>
+<tr class="row-pres"><td class="cell-time">14:30–14:45</td><td class="cell-content">
+  <div class="pres-title">Průmyslová aditiva — mikrokontaminanty povrchových vod</div>
+  <div class="pres-authors">RNDr. Marek Liška, Ph.D. (Povodí Vltavy s.p.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">14:45–15:00</td><td class="cell-content">
+  <div class="pres-title">Odkud se mohou dostávat PFAS do povrchových vod? Zkušenosti s pasivním vzorkováním od potenciálních zdrojů jejich vnosu po úpravny vod</div>
+  <div class="pres-authors">Kristina Mraz MSc, Bc. Antonín Hálek, Bc. Johana Kotková, Ing. Veronika Svobodová, Ph.D., Ing. Martin Srb, Ph.D., prof. Ing. Václav Janda, CSc., prof. Ing. Jana Pulkrabová, Ph.D., doc. Ing. Darina Dvořáková, Ph.D., Ing. Vojtěch Kouba, Ph.D. (VŠCHT Praha / PVK, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:00–15:15</td><td class="cell-content">
+  <div class="pres-title">Povinné stanovení PFAS v pitné vodě: první zkušenosti a data z praxe</div>
+  <div class="pres-authors">Mgr. Jana Kováčová, Ph.D. (ALS Czech Republic, s.r.o.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:15–15:30</td><td class="cell-content">
+  <div class="pres-title">Zkušenosti SZÚ z místního šetření vodních zdrojů kontaminovaných PFAS</div>
+  <div class="pres-authors">MUDr. František Kožíšek, CSc., Ing. Lenka Mayerová, Ph.D., MUDr. Hana Jeligová, Ing. Filip Kotal, Ph.D., Ing. Markéta Havlová, Ph.D. (SZÚ Praha)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:30–15:45</td><td class="cell-content">
+  <div class="pres-title">Inovativní postupy pro omezení kontaminace povrchových vod pesticidy v zemědělské krajině</div>
+  <div class="pres-authors">Ing. Zuzana Bílková, Ph.D., Ing. Alice Vagenknechtová, Ph.D., Mgr. Daniela Tomešová, Ing. Jana Konečná, Ph.D., Mgr. Petr Karásek (ALS Czech Republic, s.r.o. / VÚMOP, v.v.i.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">15:45–16:00</td><td class="cell-content">
+  <div class="pres-title">Veřejné vodovody — opatření ke snížení zdravotního rizika z uranu</div>
+  <div class="pres-authors">Ing. Jiří Stara, Ing. Jakub Škarda, Ing. Renáta Havlová, Ing. Kateřina Tebichová (ČEVAK, a.s.)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">16:00–16:15</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Diskusní blok — Mikropolutanty: legislativa, výskyt, eliminace</td></tr>
+<tr class="row-green"><td class="cell-time">16:15–17:00</td><td class="cell-content"><span class="disc-label">Problematika mikropolutantů ve vodách — legislativa, výskyt, eliminace</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Společné jednání odborných skupin Komise pro úpravny vody (SOVAK) a Vodárenství (CzWA)</td></tr>
+<tr class="row-green"><td class="cell-time">17:00–18:30</td><td class="cell-content">
+  <div class="pres-title">Společné jednání odborných skupin Komise pro úpravny vody (SOVAK) a Vodárenství (CzWA)</div>
+  <div class="pres-authors">[Program jednání bude vydán samostatně]</div>
+</td></tr>
+</table>
+</div>
+
+<!-- ══════════ ČTVRTEK ══════════ -->
+<div class="day-panel" id="day3">
+<table class="program-table">
+<tr class="row-day"><td class="cell-time"></td><td>ČTVRTEK&ensp;4. 6. 2026&ensp;—&ensp;3. (závěrečný) den konference</td></tr>
+<tr class="row-keynote"><td class="cell-time">8:30–9:10</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Voda propojuje</div>
+  <div class="pres-authors">RNDr. Jindřich Duras, Ph.D. (Povodí Vltavy, s.p.)</div>
+</td></tr>
+<tr class="row-kdisc"><td class="cell-time">9:10–9:20</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Zdroje pitné vody&ensp;|&ensp;Monitoring&ensp;|&ensp;Zásobování</td></tr>
+<tr class="row-pres"><td class="cell-time">9:20–9:35</td><td class="cell-content">
+  <div class="pres-title">Dlouhodobý monitoring vodárenského zdroje — řeka Úhlava</div>
+  <div class="pres-authors">Ing. Martina Klimtová, Ph.D., Mgr. Milan Koželuh, Ing. Václav Tajč (VODÁRNA PLZEŇ a.s. / Povodí Vltavy, s.p.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">9:35–9:50</td><td class="cell-content">
+  <div class="pres-title">Monitoring kontaminace vody v povodí vodní nádrže Boskovice: zvýšené koncentrace mikropolutantů</div>
+  <div class="pres-authors">Mgr. Roman Horníček, Mgr. Lenka Váňová, RNDr. Zdenka Boháčková (VAS, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">9:50–10:05</td><td class="cell-content">
+  <div class="pres-title">Představení videobanky všech vodárenských nádrží v ČR — letecký pohled na vodárenství</div>
+  <div class="pres-authors">doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team České Budějovice)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">10:05–10:20</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Infrastruktura&ensp;|&ensp;Monitoring&ensp;|&ensp;Energetika&ensp;|&ensp;Digitalizace</td></tr>
+<tr class="row-pres"><td class="cell-time">10:20–10:35</td><td class="cell-content">
+  <div class="pres-title">Zkušenosti z přípravy a realizace oprav vodojemů (VDJ)</div>
+  <div class="pres-authors">Ing. Filip Harciník (Severočeské vodovody a kanalizace, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:35–10:50</td><td class="cell-content">
+  <div class="pres-title">Vývoj koncepce zásobování města Jihlavy pitnou vodou a role výstavby vodojemu Bukovno</div>
+  <div class="pres-authors">Ing. Marek Coufal, Ph.D., Ing. Rostislav Kasal, Ph.D. (Vodohospodářský rozvoj a výstavba, a.s.)</div>
+</td></tr>
+<tr class="row-pres"><td class="cell-time">10:50–11:05</td><td class="cell-content">
+  <div class="pres-title">Vodní mikroturbíny pro vodárenství</div>
+  <div class="pres-authors">Dr. Ing. Petr Nowak, Ing. Eva Bílková Ph.D., Ing. Jiří Souček Ph.D. (ČVUT Praha)</div>
+</td></tr>
+<tr class="row-bdisc"><td class="cell-time">11:05–11:10</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
+<tr class="row-firmy"><td class="cell-time">11:10–11:20</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Nová generace sond volného chloru Pyxis ST</div>
+  <div class="pres-authors">Ing. Tomáš Chvátal — Katko s.r.o.</div>
+</td></tr>
+<tr class="row-firmy"><td class="cell-time">11:20–11:30</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Elektrická infrastruktura ve vodárenství — audity a modernizační potenciál</div>
+  <div class="pres-authors">Ing. Adam Dolejší — Schneider Electric CZ, s.r.o.</div>
+</td></tr>
+<tr class="row-firmy"><td class="cell-time">11:30–11:40</td><td class="cell-content">
+  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Filbec</div>
+</td></tr>
+<tr class="row-section"><td class="cell-time"></td><td>Závěr konference</td></tr>
+<tr class="row-green"><td class="cell-time">11:40–12:00</td><td class="cell-content"><span class="disc-label">Závěrečná diskuse — shrnutí konference</span></td></tr>
+</table>
+</div>
+
+</div><!-- /days-container -->
+
+<p class="disclaimer">Program je průběžně aktualizován. Pořadatel si vyhrazuje právo na změny v programu konference.</p>
+
+<footer class="site-footer">
+  <div class="footer-logo">
+    <div class="footer-logo-dot"></div>
+    <div class="footer-logo-dot"></div>
+    <div class="footer-logo-dot"></div>
+  </div>
+  <div class="footer-title">Pitná voda 2026</div>
+  ENVI-PUR, s.r.o. &nbsp;|&nbsp; W&amp;ET Team České Budějovice<br>
+  <a href="mailto:konference@envi-pur.cz">konference@envi-pur.cz</a>
+  &nbsp;|&nbsp;
+  <a href="https://www.konference-pitnavoda.cz" target="_blank">www.konference-pitnavoda.cz</a>
+</footer>
+
+<script>
+function showDay(idx) {
+  document.querySelectorAll('.day-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  // Scroll tabs into view on mobile
+  document.getElementById('tab' + idx).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+// Start on Tuesday (index 1)
+showDay(1);
+</script>
+</body>
+</html>
