@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Program konference — Pitná voda 2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 C16 2 6 14 6 20 a10 10 0 0 0 20 0 C26 14 16 2 16 2z' fill='%230BAAD4'/%3E%3Cpath d='M11 22 Q13 18 16 20 Q19 22 21 20' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -177,6 +178,27 @@ body {
   border: 1px solid rgba(255,255,255,0.15);
   background: rgba(255,255,255,0.06);
   color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: inline-block;
+}
+a.badge:hover {
+  background: rgba(11,170,212,0.25);
+  border-color: rgba(11,170,212,0.6);
+  color: #fff;
+  cursor: pointer;
+}
+span.badge-inactive {
+  font-family: "Outfit", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.35);
+  cursor: default;
 }
 
 /* Wave divider */
@@ -476,9 +498,9 @@ tr:last-child td { border-bottom: none; }
     </p>
     <p class="conf-org">Pořadatelé: ENVI-PUR, s.r.o. a W&amp;ET Team České Budějovice</p>
     <div class="conf-badges">
-      <span class="badge">Odborná záštita CzWA</span>
-      <span class="badge">Odborná záštita SOVAK ČR</span>
-      <span class="badge">Elektronický sborník příspěvků</span>
+      <a class="badge" href="https://www.czwa.cz" target="_blank" rel="noopener">Odborná záštita CzWA</a>
+      <a class="badge" href="https://www.sovak.cz" target="_blank" rel="noopener">Odborná záštita SOVAK ČR</a>
+      <span class="badge-inactive">Elektronický sborník příspěvků</span>
     </div>
   </div>
   <div class="wave-bottom">
