@@ -296,6 +296,37 @@ span.badge-inactive {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Uplynulý den ── */
+.day-panel.day-past {
+  filter: grayscale(85%) opacity(0.55);
+  position: relative;
+}
+.day-panel.day-past::after {
+  content: "Program tohoto dne již proběhl";
+  display: block;
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 0 24px;
+}
+.tab.tab-past .day-name,
+.tab.tab-past .day-date {
+  opacity: 0.45;
+}
+.tab.tab-past::after {
+  content: "✓";
+  font-size: 10px;
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
 /* ─────────────────────────────────────────────
    PROGRAM TABLE
 ───────────────────────────────────────────── */
@@ -494,7 +525,7 @@ tr:last-child td { border-bottom: none; }
     <h1 class="conf-title">Pitná voda <span>2026</span></h1>
     <p class="conf-meta">1.–4. června 2026 &nbsp;·&nbsp; Hotel Palcát, Tábor</p>
     <p class="conf-meta" style="font-size:13.5px; margin-top:6px; color:rgba(255,255,255,0.55);">
-      Odborní garanti: doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team) &nbsp;|&nbsp; Ing. Pavel Dobiáš, Ph.D. (ENVI-PUR)
+      Odborní garanti: doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team) &nbsp;|&nbsp; Ing. Pavel Dobiáš, Ph.D. (ENVI-PUR, s.r.o.)
     </p>
     <p class="conf-org">Pořadatelé: ENVI-PUR, s.r.o. a W&amp;ET Team České Budějovice</p>
     <div class="conf-badges">
@@ -817,6 +848,30 @@ tr:last-child td { border-bottom: none; }
 </footer>
 
 <script>
+// Datumy vypršení jednotlivých dnů (konec dne = 23:59:59)
+const DAY_DEADLINES = [
+  new Date('2026-06-01T23:59:59'), // day0 – Pondělí
+  new Date('2026-06-02T23:59:59'), // day1 – Úterý
+  new Date('2026-06-03T23:59:59'), // day2 – Středa
+  new Date('2026-06-04T23:59:59'), // day3 – Čtvrtek
+];
+
+function applyPastStyles() {
+  const now = new Date();
+  DAY_DEADLINES.forEach((deadline, i) => {
+    const panel = document.getElementById('day' + i);
+    const tab   = document.getElementById('tab' + i);
+    if (!panel || !tab) return;
+    if (now > deadline) {
+      panel.classList.add('day-past');
+      tab.classList.add('tab-past');
+    } else {
+      panel.classList.remove('day-past');
+      tab.classList.remove('tab-past');
+    }
+  });
+}
+
 function showDay(idx) {
   document.querySelectorAll('.day-panel').forEach((p, i) => {
     p.classList.toggle('active', i === idx);
@@ -824,11 +879,25 @@ function showDay(idx) {
   document.querySelectorAll('.tab').forEach((t, i) => {
     t.classList.toggle('active', i === idx);
   });
-  // Scroll tabs into view on mobile
   document.getElementById('tab' + idx).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 }
-// Start on Tuesday (index 1)
-showDay(1);
+
+// Zjistíme, který den je dnes nebo nejbližší budoucí, a otevřeme ho
+function openCurrentOrNextDay() {
+  const now = new Date();
+  // Najdeme první den, který ještě nevypršel
+  let targetIdx = DAY_DEADLINES.findIndex(d => now <= d);
+  if (targetIdx === -1) targetIdx = DAY_DEADLINES.length - 1; // vše proběhlo → poslední den
+  showDay(targetIdx);
+}
+
+applyPastStyles();
+openCurrentOrNextDay();
+
+// Kontrola každou minutu (pro případ, že stránka zůstane otevřená přes půlnoc)
+setInterval(() => {
+  applyPastStyles();
+}, 60 * 1000);
 </script>
 </body>
 </html>
