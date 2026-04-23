@@ -202,6 +202,29 @@ span.badge-inactive {
   cursor: default;
 }
 
+/* Download button */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 22px;
+  padding: 9px 20px;
+  border-radius: 24px;
+  background: var(--cyan);
+  color: white;
+  font-family: "Outfit", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+  box-shadow: 0 2px 12px rgba(11,170,212,0.35);
+}
+.btn-download:hover {
+  background: #09a0c7;
+  transform: translateY(-1px);
+}
+
 /* Wave divider */
 .wave-bottom {
   position: absolute;
@@ -610,6 +633,12 @@ tr:last-child td { border-bottom: none; }
       <a class="badge" href="https://www.sovak.cz" target="_blank" rel="noopener noreferrer">Odborná záštita SOVAK ČR</a>
       <span class="badge-inactive">Elektronický sborník příspěvků</span>
     </div>
+    <a class="btn-download" href="program-pitna-voda-2026.pdf" download>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Stáhnout program PDF
+    </a>
   </div>
   <div class="wave-bottom">
     <svg viewBox="0 0 1440 36" preserveAspectRatio="none" fill="var(--bg)">
