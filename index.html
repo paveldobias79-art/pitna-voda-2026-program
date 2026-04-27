@@ -408,6 +408,18 @@ span.badge-inactive {
 .row-green td  { background: var(--green); padding: 11px 18px; }
 .row-bdisc td  { background: var(--green); padding: 9px 18px; }
 
+/* Klikatelný řádek s odkazem na detail */
+.row-link { cursor: pointer; }
+.row-link td { transition: background .15s, box-shadow .15s; }
+.row-link:hover td { background: #b8e0b0 !important; box-shadow: inset 3px 0 0 var(--cyan); }
+.row-link .pres-title { color: var(--navy); }
+.row-link .link-hint {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.4px;
+  color: var(--cyan); margin-top: 5px; text-transform: uppercase;
+}
+.row-link .link-hint svg { flex-shrink: 0; }
+
 /* Lunch */
 .row-lunch td { background: var(--pink); padding: 9px 18px; }
 
@@ -876,10 +888,17 @@ tr:last-child td { border-bottom: none; }
 <tr class="row-section"><td class="cell-time"></td><td>Diskusní blok — Mikropolutanty: legislativa, výskyt, eliminace</td></tr>
 <tr class="row-green"><td class="cell-time">16:15–17:00</td><td class="cell-content"><span class="disc-label">Problematika mikropolutantů ve vodách — legislativa, výskyt, eliminace</span></td></tr>
 <tr class="row-section"><td class="cell-time"></td><td>Společné jednání odborných skupin Komise pro úpravny vody (SOVAK) a Vodárenství (CzWA)</td></tr>
-<tr class="row-green"><td class="cell-time">17:00–18:30</td><td class="cell-content">
-  <div class="pres-title">Společné jednání odborných skupin Komise pro úpravny vody (SOVAK) a Vodárenství (CzWA)</div>
-  <div class="pres-authors">[Program jednání bude vydán samostatně]</div>
-</td></tr>
+<tr class="row-green row-link" onclick="window.open('panel-kdo-po-nas.html','_blank')">
+  <td class="cell-time">17:00–18:30</td>
+  <td class="cell-content">
+    <div class="pres-title">Kdo po nás? — Diskusní panel SOVAK &amp; CzWA</div>
+    <div class="pres-authors">Společné jednání Komise pro úpravny vody (SOVAK ČR) a OS Vodárenství (CzWA)</div>
+    <div class="link-hint">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Otevřít program diskusního panelu
+    </div>
+  </td>
+</tr>
 </table>
 </div>
 
