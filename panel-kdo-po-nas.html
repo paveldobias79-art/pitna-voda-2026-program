@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kdo po nás? — Diskusní panel SOVAK & CzWA · Pitná voda 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #1F3864;
+  --navy-dk:  #142548;
+  --navy-lt:  #2B4E8C;
+  --cyan:     #3498DB;
+  --cyan-lt:  #5DADE2;
+  --white:    #FFFFFF;
+  --off-white:#F8FAFC;
+  --light:    #EEF2F8;
+  --text:     #2C3E50;
+  --muted:    #7F8C8D;
+  --border:   #D5DCE8;
+  --red:      #C0392B;
+  --gold:     #D4AC0D;
+  --sans:     "Source Sans 3", sans-serif;
+  --serif-q:  "Source Serif 4", Georgia, serif;
+  --head:     "Montserrat", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+/* ─── NAVBAR ─── */
+.navbar {
+  background: var(--navy);
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.nav-brand {
+  font-family: var(--head); font-weight: 700; font-size: 15px;
+  color: white; letter-spacing: 0.3px; text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-brand-sub { font-weight: 300; opacity: 0.7; font-size: 12px; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 10px; }
+.nav-right { display: flex; align-items: center; gap: 16px; font-size: 12px; color: rgba(255,255,255,0.7); }
+.nav-badge {
+  background: var(--cyan); color: white; font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 0.3px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 50%, var(--navy-lt) 100%);
+  padding: 80px 40px 0;
+  position: relative; overflow: hidden;
+  min-height: 520px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 60% 30%, rgba(52,152,219,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Water wave lines decorative */
+.hero::after {
+  content: "";
+  position: absolute; bottom: 48px; left: 0; right: 0; height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='rgba(255,255,255,0.04)' d='M0,60 C180,90 360,30 540,60 C720,90 900,30 1080,60 C1260,90 1350,45 1440,60 L1440,120 L0,120Z'/%3E%3Cpath fill='rgba(255,255,255,0.06)' d='M0,80 C200,50 400,100 600,70 C800,40 1000,90 1200,65 C1300,52 1380,75 1440,68 L1440,120 L0,120Z'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: cover; pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 1000px; padding-bottom: 60px; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cyan-lt); margin-bottom: 12px;
+}
+.hero-orgs {
+  font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-family: var(--head); font-size: clamp(48px, 9vw, 100px);
+  font-weight: 800; line-height: 1; color: white;
+  letter-spacing: -2px; margin-bottom: 8px;
+}
+.hero-title .q { color: var(--cyan-lt); }
+.hero-tagline {
+  font-family: var(--head); font-size: clamp(14px, 2vw, 20px);
+  font-weight: 400; color: rgba(255,255,255,0.7);
+  margin-bottom: 36px; max-width: 680px; line-height: 1.5;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 0;
+  background: rgba(0,0,0,0.25); border-radius: 8px;
+  overflow: hidden; display: inline-flex;
+}
+.meta-chip {
+  padding: 14px 24px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.meta-chip:last-child { border-right: none; }
+.meta-chip-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan-lt); margin-bottom: 3px; }
+.meta-chip-val { font-size: 14px; font-weight: 700; color: white; }
+
+/* Wave bottom */
+.wave-bottom {
+  display: block; width: 100%; line-height: 0;
+  background: var(--navy);
+}
+.wave-bottom svg { display: block; }
+
+/* ─── STAT BAND ─── */
+.stat-band {
+  background: var(--navy);
+  padding: 36px 40px;
+}
+.stat-band-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 48px; align-items: center;
+}
+.stat-big {
+  font-family: var(--head); font-size: clamp(80px, 14vw, 140px);
+  font-weight: 900; line-height: 0.9; color: var(--cyan-lt);
+  letter-spacing: -4px;
+}
+.stat-pct { font-size: 0.55em; letter-spacing: -1px; vertical-align: super; margin-top: 0.2em; }
+.stat-text-block {}
+.stat-title {
+  font-family: var(--head); font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
+  color: white; line-height: 1.3; margin-bottom: 10px;
+}
+.stat-body { font-size: 15px; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.75; max-width: 560px; }
+.stat-body strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+/* ─── WHITE SECTION BASE ─── */
+.section { padding: 80px 40px; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--head); font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 40px;
+}
+.section-title::after {
+  content: ""; display: block; width: 48px; height: 3px;
+  background: var(--cyan); margin-top: 12px; border-radius: 2px;
+}
+
+/* ─── QUOTE ─── */
+.quote-section { background: var(--light); }
+.quote-card {
+  background: white; border-radius: 10px;
+  padding: 36px 40px;
+  border-left: 4px solid var(--cyan);
+  box-shadow: 0 2px 20px rgba(31,56,100,0.08);
+}
+.quote-text {
+  font-family: var(--serif-q);
+  font-size: clamp(15px, 1.8vw, 17.5px); font-style: italic; font-weight: 300;
+  color: var(--text); line-height: 1.8; margin-bottom: 16px;
+}
+.quote-src {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+  color: var(--navy);
+}
+
+/* ─── PROGRAM ─── */
+.program-section { background: var(--white); }
+.prog-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.prog-item {
+  display: grid; grid-template-columns: 64px 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.prog-item:last-child { border-bottom: none; }
+.prog-item:hover { background: var(--off-white); }
+.prog-num-col {
+  background: var(--navy); display: flex; align-items: center; justify-content: center;
+  font-family: var(--head); font-size: 22px; font-weight: 900; color: rgba(255,255,255,0.35);
+  flex-shrink: 0; padding: 24px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.prog-body { padding: 22px 28px; }
+.prog-tag {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 3px;
+  background: rgba(52,152,219,0.1); color: var(--cyan); border: 1px solid rgba(52,152,219,0.25);
+  margin-bottom: 8px;
+}
+.prog-title {
+  font-family: var(--head); font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 5px;
+}
+.prog-author { font-size: 12.5px; color: var(--muted); }
+
+/* ─── PANELISTS ─── */
+.panel-section { background: var(--light); }
+.panelists-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.panelist-card {
+  background: white; border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 22px 24px;
+  box-shadow: 0 1px 8px rgba(31,56,100,0.06);
+  transition: box-shadow .2s, transform .2s, border-color .2s;
+  position: relative;
+}
+.panelist-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--navy); border-radius: 8px 8px 0 0;
+}
+.panelist-card:hover {
+  box-shadow: 0 6px 24px rgba(31,56,100,0.14);
+  transform: translateY(-2px);
+  border-color: rgba(52,152,219,0.4);
+}
+.panelist-role {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 10px;
+}
+.panelist-name {
+  font-family: var(--head); font-size: 15.5px; font-weight: 700;
+  color: var(--navy); line-height: 1.25; margin-bottom: 6px;
+}
+.panelist-org { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.panelist-card.moderator::before { background: var(--gold); }
+.panelist-card.moderator .panelist-role { color: var(--gold); }
+.panelist-card.tbd { opacity: 0.65; }
+.panelist-card.tbd .panelist-name { font-style: italic; }
+
+/* ─── CORE MESSAGE ─── */
+.message-section {
+  background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 100%);
+  padding: 100px 40px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.message-section::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(52,152,219,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.message-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.msg-lead {
+  font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300;
+  line-height: 1.8; margin-bottom: 36px; font-style: italic;
+}
+.msg-divider { width: 48px; height: 2px; background: var(--cyan-lt); margin: 0 auto 32px; }
+.msg-statement {
+  font-family: var(--head); font-size: clamp(24px, 4vw, 44px);
+  font-weight: 800; color: white; line-height: 1.2; letter-spacing: -0.5px;
+}
+.msg-statement em { color: var(--cyan-lt); font-style: normal; }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--navy-dk);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 36px 40px;
+  display: flex; flex-wrap: wrap; gap: 20px;
+  justify-content: space-between; align-items: center;
+}
+.footer-brand { font-family: var(--head); font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.footer-right { font-size: 11.5px; color: rgba(255,255,255,0.4); text-align: right; line-height: 1.7; }
+.footer-link { color: var(--cyan-lt); text-decoration: none; }
+.footer-link:hover { text-decoration: underline; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .1s; } .reveal.d2 { transition-delay: .2s; }
+.reveal.d3 { transition-delay: .3s; } .reveal.d4 { transition-delay: .4s; }
+
+@media (max-width: 720px) {
+  .navbar { padding: 0 16px; }
+  .hero { padding: 56px 20px 0; }
+  .hero-title { letter-spacing: -1px; }
+  .hero-meta { flex-direction: column; width: 100%; }
+  .meta-chip { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .stat-band { padding: 36px 20px; }
+  .stat-band-inner { grid-template-columns: 1fr; gap: 16px; }
+  .stat-big { font-size: 80px; }
+  .section { padding: 56px 20px; }
+  .prog-item { grid-template-columns: 44px 1fr; }
+  .prog-body { padding: 18px 20px; }
+  .message-section { padding: 72px 20px; }
+  .footer { padding: 28px 20px; }
+  .footer-right { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="nav-brand" href="https://konference-pitnavoda.cz" target="_blank">
+    Pitná voda 2026
+    <span class="nav-brand-sub">konference-pitnavoda.cz</span>
+  </a>
+  <div class="nav-right">
+    <span>Středa 3. 6. 2026</span>
+    <span class="nav-badge">17:00 – 18:30</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">Diskusní panel — Spojené jednání</div>
+    <div class="hero-orgs reveal d1">
+      Komise pro úpravny vody SOVAK ČR &nbsp;|&nbsp; Odborná skupina Vodárenství CzWA
+    </div>
+    <div class="hero-title reveal d2">KDO PO NÁS<span class="q">?</span></div>
+    <div class="hero-tagline reveal d3">
+      Jaká je personální situace ve vodárenství?<br>
+      Budeme mít dostatek odborníků pro příští desetiletí?
+    </div>
+    <div class="hero-meta reveal d4">
+      <div class="meta-chip">
+        <div class="meta-chip-label">Datum</div>
+        <div class="meta-chip-val">Středa 3. června 2026</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Čas</div>
+        <div class="meta-chip-val">17:00 – 18:30</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Místo</div>
+        <div class="meta-chip-val">Hotel Palcát, Tábor</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Formát</div>
+        <div class="meta-chip-val">Přednášky + panel</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-bottom" style="background:var(--navy)">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" style="background:white">
+    <path fill="#1F3864" d="M0,48 L0,16 C180,40 360,0 540,20 C720,40 900,4 1080,20 C1260,36 1350,12 1440,20 L1440,48Z"/>
+  </svg>
+</div>
+
+<!-- STAT BAND -->
+<div class="stat-band">
+  <div class="stat-band-inner">
+    <div class="stat-big reveal">30<span class="stat-pct">%</span></div>
+    <div class="stat-text-block reveal d2">
+      <div class="stat-title">zaměstnanců provozovatelských organizací odejde v příštích 10 letech do starobního důchodu</div>
+      <div class="stat-body">
+        Obor vodovodů a kanalizací se potýká se <strong>stárnutím zaměstnanců</strong> a velmi nízkým počtem absolventů.
+        Již několik let se zabýváme otázkou, jak novou generaci vodohospodářů <strong>nadchnout a získat</strong> —
+        a jak zajistit předání dostatku zkušeností od starší generace.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE DIVIDER 2 -->
+<div style="background:var(--navy)">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" style="display:block">
+    <path fill="white" d="M0,0 L1440,0 L1440,32 C1260,12 1080,44 900,28 C720,12 540,44 360,28 C180,12 90,40 0,28 Z"/>
+  </svg>
+</div>
+
+<!-- QUOTE -->
+<section class="section quote-section">
+  <div class="section-inner">
+    <div class="section-label reveal">O čem hovoříme</div>
+    <h2 class="section-title reveal d1">Kontext a výzva</h2>
+    <div class="quote-card reveal d2">
+      <div class="quote-text">
+        „Vodárenství je velmi perspektivní obor, který je bohužel málo propagován, a proto jeho největší výhody nejsou
+        v potřebné míře prezentovány veřejnosti. Nabízí uplatnění téměř jakéhokoliv studijního oboru — od učebních oborů,
+        odborných škol až po vysokoškolské. Je to obor, který se nikdy nezastaví, protože pitnou vodu dodáváme
+        a odpadní vodu odvádíme 24 hodin denně, 7 dní v týdnu, 365 dní v roce — a tím nabízí zaměstnancům
+        velkou stabilitu."
+      </div>
+      <div class="quote-src">Mgr. Michaela Vojtěchovská Šrámková, Ph.D. · SOVAK ČR</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="section program-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Struktura bloku</div>
+    <h2 class="section-title reveal d1">Program</h2>
+    <div class="prog-list reveal d2">
+
+      <div class="prog-item">
+        <div class="prog-num-col">I</div>
+        <div class="prog-body">
+          <div class="prog-tag">Úvodní přednáška</div>
+          <div class="prog-title">Personalistika a její problémy v oboru VaK</div>
+          <div class="prog-author">Mgr. Michaela Vojtěchovská Šrámková, Ph.D. &nbsp;·&nbsp; SOVAK ČR</div>
+        </div>
+      </div>
+
+      <div class="prog-item">
+        <div class="prog-num-col">II</div>
+        <div class="prog-body">
+          <div class="prog-tag">Výzkum · YWP</div>
+          <div class="prog-title">Výsledky dotazníkového šetření mezi Young Water Professionals</div>
+          <div class="prog-author">Ing. Denisa Čadková (YWP CZ)</div>
+        </div>
+      </div>
+
+      <div class="prog-item">
+        <div class="prog-num-col">III</div>
+        <div class="prog-body">
+          <div class="prog-tag">Přednáška</div>
+          <div class="prog-title">Přehled studijních programů a rozsahů vzdělávání se zaměřením na vodárenství</div>
+          <div class="prog-author">Ing. Helena Sochorová, Ph.D. &nbsp;·&nbsp; CzWA OS Vodárenství</div>
+        </div>
+      </div>
+
+      <div class="prog-item">
+        <div class="prog-num-col">IV</div>
+        <div class="prog-body">
+          <div class="prog-tag">Panelová diskuse</div>
+          <div class="prog-title">Kdo po nás? — otevřená diskuse panelistů s účastníky konference</div>
+          <div class="prog-author">Moderuje: Mgr. Jiří Paul, MBA &nbsp;·&nbsp; CzWA OS Vodárenství</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PANELISTS -->
+<section class="section panel-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Účastníci diskuse</div>
+    <h2 class="section-title reveal d1">Panelisté</h2>
+    <div class="panelists-grid">
+
+      <div class="panelist-card reveal">
+        <div class="panelist-name">Mgr. Michaela Vojtěchovská Šrámková, Ph.D.</div>
+        <div class="panelist-org">SOVAK ČR</div>
+      </div>
+
+      <div class="panelist-card reveal d1">
+        <div class="panelist-name">Ing. Helena Sochorová, Ph.D.</div>
+        <div class="panelist-org">CzWA OS Vodárenství</div>
+      </div>
+
+      <div class="panelist-card reveal d2" style="opacity:.5;border-style:dashed;">
+        <div class="panelist-name" style="font-style:italic;color:var(--muted);">Odborník pro vzdělávání</div>
+        <div class="panelist-org" style="font-style:italic;">bude upřesněno</div>
+      </div>
+
+      <div class="panelist-card reveal d3">
+        <div class="panelist-name">Ing. Tomáš Hloušek, Ph.D.</div>
+        <div class="panelist-org">Středočeské vodárny, a.s.<br>Komise pro úpravny vody SOVAK ČR</div>
+      </div>
+
+      <div class="panelist-card reveal d3">
+        <div class="panelist-name">Ing. Denisa Čadková</div>
+        <div class="panelist-org">YWP CZ — hlas nastupující generace</div>
+      </div>
+
+      <div class="panelist-card tbd reveal d4">
+        <div class="panelist-name">Zástupce ČEVAK</div>
+        <div class="panelist-org">ČEVAK, a.s.</div>
+      </div>
+
+      <div class="panelist-card moderator reveal d4">
+        <div class="panelist-role">Moderátor</div>
+        <div class="panelist-name">Mgr. Jiří Paul, MBA</div>
+        <div class="panelist-org">CzWA OS Vodárenství</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CORE MESSAGE -->
+<section class="message-section">
+  <div class="message-inner">
+    <div class="msg-lead reveal">
+      Umíme pracovat s mladými? Dokážeme je v oboru udržet?<br>
+      Rozumíme jim? Využíváme naplno zkušenosti generace, která odchází?
+    </div>
+    <div class="msg-divider reveal d1"></div>
+    <div class="msg-statement reveal d2">
+      Hlavní otázka<br>už nezní <em>CO po nás</em> —<br>ale <em>KDO po nás.</em>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-brand">Pitná voda 2026</div>
+    <div class="footer-sub">
+      1.–4. června 2026 · Hotel Palcát, Tábor<br>
+      Pořadatel: ENVI-PUR, s.r.o. a W&amp;ET Team, České Budějovice
+    </div>
+  </div>
+  <div class="footer-right">
+    Diskusní blok v rámci konference Pitná voda 2026<br>
+    Středa 3. 6. · 17:00–18:30<br>
+    <a class="footer-link" href="https://konference-pitnavoda.cz" target="_blank">konference-pitnavoda.cz</a>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
