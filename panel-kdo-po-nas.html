@@ -366,6 +366,7 @@ body { font-family: var(--sans); color: var(--text); background: var(--white); o
 
 <!-- HERO -->
 <section class="hero">
+  <canvas id="hero-anim" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
   <div class="hero-inner">
     <div class="hero-eyebrow reveal">Diskusní panel — Spojené jednání</div>
     <div class="hero-orgs reveal d1">
@@ -574,6 +575,83 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<script>
+/* === Animace C: Tok zkušeností — hero sekce === */
+(function () {
+  var cv = document.getElementById('hero-anim');
+  if (!cv) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var cx = cv.getContext('2d');
+  var W, H, particles;
+
+  function resize() {
+    W = cv.offsetWidth;
+    H = cv.offsetHeight;
+    if (!W || !H) return;
+    cv.width  = W;
+    cv.height = H;
+    init();
+  }
+
+  function init() {
+    var N = Math.max(120, Math.round(W * H / 2600));
+    particles = [];
+    for (var i = 0; i < N; i++) {
+      particles.push({
+        x:     Math.random() * W,
+        baseY: H * (0.10 + Math.random() * 0.80),
+        spd:   0.28 + Math.random() * 1.05,
+        amp:   4    + Math.random() * 24,
+        freq:  0.005 + Math.random() * 0.013,
+        ph:    Math.random() * Math.PI * 2,
+        sz:    0.7  + Math.random() * 2.0,
+      });
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  function frame() {
+    cx.clearRect(0, 0, W, H);
+    var inv = 1;
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.spd;
+      if (p.x > W + 5) p.x = -5;
+
+      var py = p.baseY + Math.sin(p.x * p.freq + p.ph) * p.amp;
+      var tx = p.x / W;   /* 0 = vlevo (senioři)  1 = vpravo (junioři) */
+
+      /* Hustota toku: vlevo hustý → zúžení uprostřed → vpravo řídký */
+      var d;
+      if      (tx < 0.38) d = 0.58 + (0.38 - tx) * 0.90;
+      else if (tx < 0.50) d = 0.58 - (tx  - 0.38) * 4.50;
+      else if (tx < 0.62) d = 0.58 - (0.62 - tx)  * 4.50;
+      else                d = 0.16 + (tx  - 0.62) * 0.60;
+      if (d < 0) d = 0;
+      if (d > 1) d = 1;
+
+      /* Barva: vlevo bílá/světle modrá → vpravo cyan */
+      var r = Math.round(93  + (1 - tx) * 148);
+      var g = Math.round(152 + (1 - tx) *  58);
+      var b = 219;
+
+      cx.beginPath();
+      cx.arc(p.x, py, p.sz, 0, Math.PI * 2);
+      cx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (d * 0.36) + ')';
+      cx.fill();
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+}());
 </script>
 </body>
 </html>
