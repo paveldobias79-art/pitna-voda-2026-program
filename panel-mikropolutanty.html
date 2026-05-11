@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Diskusní blok Mikropolutanty: legislativa, výskyt, eliminace — mezioborový panel. Středa 3. června 2026, 16:15–17:00, Hotel Palcát, Tábor.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Mikropolutanty — Diskusní blok · Pitná voda 2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 C16 2 6 14 6 20 a10 10 0 0 0 20 0 C26 14 16 2 16 2z' fill='%230BAAD4'/%3E%3Cpath d='M11 22 Q13 18 16 20 Q19 22 21 20' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #1F3864;
+  --navy-dk:  #142548;
+  --navy-lt:  #2B4E8C;
+  --cyan:     #3498DB;
+  --cyan-lt:  #5DADE2;
+  --white:    #FFFFFF;
+  --off-white:#F8FAFC;
+  --light:    #EEF2F8;
+  --text:     #2C3E50;
+  --muted:    #7F8C8D;
+  --border:   #D5DCE8;
+  --green:    #1E8449;
+  --green-lt: #D5F0DC;
+  --sans:     "Source Sans 3", sans-serif;
+  --serif-q:  "Source Serif 4", Georgia, serif;
+  --head:     "Montserrat", sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+/* ─── NAVBAR ─── */
+.navbar {
+  background: var(--navy);
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.nav-brand {
+  font-family: var(--head); font-weight: 700; font-size: 15px;
+  color: white; letter-spacing: 0.3px; text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-brand-sub { font-weight: 300; opacity: 0.7; font-size: 12px; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 10px; }
+.nav-right { display: flex; align-items: center; gap: 16px; font-size: 12px; color: rgba(255,255,255,0.7); }
+.nav-badge {
+  background: var(--cyan); color: white; font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 0.3px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 50%, var(--navy-lt) 100%);
+  padding: 80px 40px 0;
+  position: relative; overflow: hidden;
+  min-height: 520px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 60% 30%, rgba(52,152,219,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute; bottom: 48px; left: 0; right: 0; height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='rgba(255,255,255,0.04)' d='M0,60 C180,90 360,30 540,60 C720,90 900,30 1080,60 C1260,90 1350,45 1440,60 L1440,120 L0,120Z'/%3E%3Cpath fill='rgba(255,255,255,0.06)' d='M0,80 C200,50 400,100 600,70 C800,40 1000,90 1200,65 C1300,52 1380,75 1440,68 L1440,120 L0,120Z'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: cover; pointer-events: none;
+}
+
+/* ─── MOLEKULÁRNÍ ANIMACE (kapka B + ripple C + molekula) ─── */
+.hero-molecules {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.mol-svg {
+  position: absolute; right: -3%; top: 50%;
+  transform: translateY(-50%);
+  width: 56%; max-width: 700px;
+}
+/* Kapka — B */
+.mol-drop {
+  animation: drop-pulse 14s ease-in-out infinite;
+}
+@keyframes drop-pulse {
+  0%, 100% { opacity: 0.07; }
+  50%       { opacity: 0.04; }
+}
+/* Ripple — C */
+.mol-ripples ellipse {
+  fill: none; stroke: white; stroke-linecap: round;
+}
+.mol-ripples {
+  animation: ripple-breath 10s ease-in-out infinite;
+}
+@keyframes ripple-breath {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+/* Molekula */
+.mol-svg line   { stroke: white; stroke-width: 1.4; stroke-linecap: round; }
+.mol-svg circle { fill: rgba(255,255,255,0.35); stroke: white; stroke-width: 1.4; }
+.mol-group {
+  animation: mol-drift 26s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes mol-drift {
+  0%,100% { transform: translate(0,0)       rotate(0deg);   }
+  25%     { transform: translate(-13px,-8px) rotate(0.6deg); }
+  50%     { transform: translate(7px,13px)   rotate(-0.5deg);}
+  75%     { transform: translate(-8px,5px)   rotate(0.35deg);}
+}
+
+/* Wave bottom */
+.wave-bottom { display: block; width: 100%; line-height: 0; background: var(--navy); }
+.wave-bottom svg { display: block; }
+
+.hero-inner { position: relative; z-index: 1; max-width: 1000px; padding-bottom: 60px; }
+.hero-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cyan-lt); margin-bottom: 12px;
+}
+.hero-orgs {
+  font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-family: var(--head); font-size: clamp(36px, 7vw, 80px);
+  font-weight: 800; line-height: 1; color: white;
+  letter-spacing: -2px; margin-bottom: 8px;
+}
+.hero-title .hl { color: var(--cyan-lt); }
+.hero-tagline {
+  font-family: var(--head); font-size: clamp(14px, 2vw, 20px);
+  font-weight: 400; color: rgba(255,255,255,0.7);
+  margin-bottom: 36px; max-width: 720px; line-height: 1.5;
+}
+.hero-pillars {
+  display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap;
+}
+.hero-pillar {
+  padding: 6px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--head);
+}
+.hero-meta {
+  background: rgba(0,0,0,0.25); border-radius: 8px;
+  overflow: hidden; display: inline-flex;
+}
+.meta-chip {
+  padding: 14px 24px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.meta-chip:last-child { border-right: none; }
+.meta-chip-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan-lt); margin-bottom: 3px; }
+.meta-chip-val { font-size: 14px; font-weight: 700; color: white; }
+
+/* ─── STAT BAND ─── */
+.stat-band { background: var(--navy); padding: 36px 40px; }
+.stat-band-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 48px; align-items: center;
+}
+.stat-big {
+  font-family: var(--head); font-size: clamp(80px, 14vw, 130px);
+  font-weight: 900; line-height: 0.9; color: var(--cyan-lt);
+  letter-spacing: -4px;
+}
+.stat-unit { font-size: 0.38em; letter-spacing: -1px; vertical-align: super; margin-top: 0.1em; display: inline-block; }
+.stat-text-block {}
+.stat-title {
+  font-family: var(--head); font-size: clamp(18px, 2.5vw, 26px); font-weight: 700;
+  color: white; line-height: 1.3; margin-bottom: 10px;
+}
+.stat-body { font-size: 15px; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.75; max-width: 560px; }
+.stat-body strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+/* ─── WHITE SECTION BASE ─── */
+.section { padding: 80px 40px; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--head); font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 40px;
+}
+.section-title::after {
+  content: ""; display: block; width: 48px; height: 3px;
+  background: var(--cyan); margin-top: 12px; border-radius: 2px;
+}
+
+/* ─── CONTEXT BLOCK ─── */
+.context-section { background: var(--light); }
+.context-card {
+  background: white; border-radius: 10px;
+  padding: 36px 40px;
+  border-left: 4px solid var(--cyan);
+  box-shadow: 0 2px 20px rgba(31,56,100,0.08);
+}
+.context-text {
+  font-family: var(--serif-q);
+  font-size: clamp(15px, 1.8vw, 17.5px); font-weight: 300;
+  color: var(--text); line-height: 1.8; margin-bottom: 20px;
+}
+.context-text strong { font-weight: 600; color: var(--navy); }
+.context-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+}
+.context-pill {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 4px;
+  background: rgba(52,152,219,0.08); color: var(--cyan);
+  border: 1px solid rgba(52,152,219,0.22);
+}
+
+/* ─── PROGRAM / PILÍŘE ─── */
+.program-section { background: var(--white); }
+.prog-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.prog-item {
+  display: grid; grid-template-columns: 64px 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.prog-item:last-child { border-bottom: none; }
+.prog-item:hover { background: var(--off-white); }
+.prog-num-col {
+  background: var(--navy); display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 26px;
+  font-family: var(--head); font-size: 22px; font-weight: 900; color: rgba(255,255,255,0.35);
+  flex-shrink: 0;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.prog-item.panel-item .prog-num-col { background: var(--cyan); color: rgba(255,255,255,0.7); }
+.prog-body { padding: 22px 28px; }
+.prog-tag {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 3px;
+  background: rgba(52,152,219,0.1); color: var(--cyan); border: 1px solid rgba(52,152,219,0.25);
+  margin-bottom: 10px;
+}
+.prog-title {
+  font-family: var(--head); font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 6px;
+}
+.prog-author { font-size: 12.5px; color: var(--muted); margin-bottom: 10px; }
+.prog-topics {
+  list-style: none; margin-top: 10px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.prog-topics li {
+  font-size: 13px; color: var(--muted); line-height: 1.4;
+  padding-left: 16px; position: relative;
+}
+.prog-topics li::before {
+  content: "—";
+  position: absolute; left: 0;
+  color: var(--cyan); font-weight: 700;
+}
+
+/* ─── PANELISTS ─── */
+.panel-section { background: var(--light); }
+.panelists-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.panelist-card {
+  background: white; border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 22px 24px;
+  box-shadow: 0 1px 8px rgba(31,56,100,0.06);
+  transition: box-shadow .2s, transform .2s, border-color .2s;
+  position: relative;
+}
+.panelist-card::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--navy); border-radius: 8px 8px 0 0;
+}
+.panelist-card:hover {
+  box-shadow: 0 6px 24px rgba(31,56,100,0.14);
+  transform: translateY(-2px);
+  border-color: rgba(52,152,219,0.4);
+}
+.panelist-role {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 10px;
+}
+.panelist-name {
+  font-family: var(--head); font-size: 15.5px; font-weight: 700;
+  color: var(--navy); line-height: 1.25; margin-bottom: 6px;
+}
+.panelist-org { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.panelist-card.moderator::before { background: #B7950B; }
+.panelist-card.moderator .panelist-role { color: #B7950B; }
+
+/* ─── CORE MESSAGE ─── */
+.message-section {
+  background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 100%);
+  padding: 100px 40px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.message-section::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(52,152,219,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.message-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.msg-lead {
+  font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300;
+  line-height: 1.8; margin-bottom: 36px; font-style: italic;
+}
+.msg-divider { width: 48px; height: 2px; background: var(--cyan-lt); margin: 0 auto 32px; }
+.msg-statement {
+  font-family: var(--head); font-size: clamp(24px, 4vw, 44px);
+  font-weight: 800; color: white; line-height: 1.2; letter-spacing: -0.5px;
+}
+.msg-statement em { color: var(--cyan-lt); font-style: normal; }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--navy-dk);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 36px 40px;
+  display: flex; flex-wrap: wrap; gap: 20px;
+  justify-content: space-between; align-items: center;
+}
+.footer-brand { font-family: var(--head); font-size: 16px; font-weight: 700; color: white; margin-bottom: 4px; }
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.footer-right { font-size: 11.5px; color: rgba(255,255,255,0.4); text-align: right; line-height: 1.7; }
+.footer-link { color: var(--cyan-lt); text-decoration: none; }
+.footer-link:hover { text-decoration: underline; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .1s; } .reveal.d2 { transition-delay: .2s; }
+.reveal.d3 { transition-delay: .3s; } .reveal.d4 { transition-delay: .4s; }
+
+/* ── Tablet (max 900px) ── */
+@media (max-width: 900px) {
+  .hero { padding: 64px 32px 0; }
+  .section { padding: 64px 32px; }
+  .stat-band { padding: 36px 32px; }
+  .message-section { padding: 80px 32px; }
+  .footer { padding: 32px 32px; }
+}
+
+/* ── Velký telefon / malý tablet (max 720px) ── */
+@media (max-width: 720px) {
+  .navbar { padding: 0 16px; }
+  .nav-brand-sub { display: none; }
+  .hero { padding: 56px 20px 0; }
+  .hero-title { letter-spacing: -1px; }
+  .hero-meta { flex-direction: column; width: 100%; }
+  .meta-chip { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .stat-band { padding: 36px 20px; }
+  .stat-band-inner { grid-template-columns: 1fr; gap: 16px; }
+  .stat-big { font-size: 80px; letter-spacing: -2px; }
+  .section { padding: 48px 20px; }
+  .prog-item { grid-template-columns: 44px 1fr; }
+  .prog-num-col { font-size: 18px; padding-top: 20px; }
+  .prog-body { padding: 18px 20px; }
+  .prog-title { font-size: 15px; }
+  .message-section { padding: 72px 20px; }
+  .footer { padding: 28px 20px; flex-direction: column; gap: 16px; }
+  .footer-right { text-align: left; }
+  .mol-svg { width: 80%; right: -10%; opacity: 0.07; }
+}
+
+/* ── Mobil (max 480px) ── */
+@media (max-width: 480px) {
+  .hero { padding: 44px 16px 0; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 2px; }
+  .hero-orgs { font-size: 12px; }
+  .hero-tagline { font-size: 14px; margin-bottom: 28px; }
+  .hero-pillars { gap: 6px; }
+  .hero-pillar { font-size: 11px; padding: 5px 12px; }
+  .stat-big { font-size: clamp(60px, 18vw, 80px); letter-spacing: -2px; }
+  .stat-title { font-size: 17px; }
+  .stat-body { font-size: 14px; }
+  .section { padding: 40px 16px; }
+  .section-title { margin-bottom: 28px; }
+  .context-card { padding: 24px 20px; }
+  .context-text { font-size: 15px; }
+  .panelists-grid { grid-template-columns: 1fr; }
+  .panelist-card { padding: 18px 20px; }
+  .message-section { padding: 56px 16px; }
+  .footer { padding: 24px 16px; }
+  .footer-brand { font-size: 14px; }
+  .meta-chip-val { font-size: 13px; }
+  .mol-svg { display: none; }
+}
+
+/* ── Malý mobil (max 380px) ── */
+@media (max-width: 380px) {
+  .hero-title { letter-spacing: -2px; }
+  .nav-badge { display: none; }
+  .stat-big { font-size: 56px; }
+  .prog-item { grid-template-columns: 36px 1fr; }
+  .prog-num-col { font-size: 15px; padding-top: 16px; }
+  .prog-body { padding: 14px 14px; }
+}
+
+/* ── Přístupnost — omezení pohybu ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .mol-group, .mol-drop, .mol-ripples { animation: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="nav-brand" href="index.html">
+    Pitná voda 2026
+    <span class="nav-brand-sub">← Program konference</span>
+  </a>
+  <div class="nav-right">
+    <span>Středa 3. 6. 2026</span>
+    <span class="nav-badge">16:15 – 17:00</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <!-- Molekulární síť s motivem vodní kapky (kapka B + ripple C + molekula) -->
+  <div class="hero-molecules" aria-hidden="true">
+    <svg class="mol-svg" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- B: Kapka vody — velká, velmi průhledná, za molekulou -->
+      <g class="mol-drop">
+        <path d="M16 2 C16 2 6 14 6 20 a10 10 0 0 0 20 0 C26 14 16 2 16 2z"
+              transform="translate(214,20) scale(14)"
+              fill="white" stroke="none"/>
+      </g>
+
+      <!-- C: Ripple kruhy — odraz kapky na vodní hladině -->
+      <g class="mol-ripples">
+        <ellipse cx="438" cy="430" rx="60"  ry="13"  stroke-width="1.2" opacity="0.22"/>
+        <ellipse cx="438" cy="438" rx="100" ry="21"  stroke-width="1.0" opacity="0.16"/>
+        <ellipse cx="438" cy="447" rx="148" ry="31"  stroke-width="0.8" opacity="0.10"/>
+        <ellipse cx="438" cy="457" rx="205" ry="43"  stroke-width="0.6" opacity="0.06"/>
+        <ellipse cx="438" cy="468" rx="268" ry="57"  stroke-width="0.5" opacity="0.03"/>
+      </g>
+
+      <!-- Molekulární struktura — tři kondenzované šestičlenné prsteny -->
+      <g class="mol-group">
+        <!-- vazby / bonds -->
+        <!-- Prsten 1 -->
+        <line x1="200" y1="160" x2="270" y2="120"/>
+        <line x1="270" y1="120" x2="340" y2="160"/>
+        <line x1="340" y1="160" x2="340" y2="240"/>
+        <line x1="340" y1="240" x2="270" y2="280"/>
+        <line x1="270" y1="280" x2="200" y2="240"/>
+        <line x1="200" y1="240" x2="200" y2="160"/>
+        <!-- Prsten 2 -->
+        <line x1="340" y1="160" x2="410" y2="120"/>
+        <line x1="410" y1="120" x2="480" y2="160"/>
+        <line x1="480" y1="160" x2="480" y2="240"/>
+        <line x1="480" y1="240" x2="410" y2="280"/>
+        <line x1="410" y1="280" x2="340" y2="240"/>
+        <!-- Prsten 3 -->
+        <line x1="480" y1="160" x2="550" y2="120"/>
+        <line x1="550" y1="120" x2="620" y2="160"/>
+        <line x1="620" y1="160" x2="620" y2="240"/>
+        <line x1="620" y1="240" x2="550" y2="280"/>
+        <line x1="550" y1="280" x2="480" y2="240"/>
+        <!-- Boční vazby / substituenty -->
+        <line x1="200" y1="160" x2="130" y2="120"/>
+        <line x1="200" y1="240" x2="130" y2="280"/>
+        <line x1="270" y1="120" x2="270" y2="50"/>
+        <line x1="410" y1="120" x2="410" y2="50"/>
+        <line x1="550" y1="120" x2="550" y2="50"/>
+        <line x1="620" y1="160" x2="690" y2="120"/>
+        <line x1="620" y1="240" x2="690" y2="280"/>
+        <line x1="270" y1="280" x2="270" y2="350"/>
+        <line x1="410" y1="280" x2="410" y2="350"/>
+        <line x1="550" y1="280" x2="550" y2="350"/>
+        <!-- atomy — prsteny -->
+        <circle cx="200" cy="160" r="7"/>
+        <circle cx="270" cy="120" r="7"/>
+        <circle cx="340" cy="160" r="7"/>
+        <circle cx="340" cy="240" r="7"/>
+        <circle cx="270" cy="280" r="7"/>
+        <circle cx="200" cy="240" r="7"/>
+        <circle cx="410" cy="120" r="7"/>
+        <circle cx="480" cy="160" r="7"/>
+        <circle cx="480" cy="240" r="7"/>
+        <circle cx="410" cy="280" r="7"/>
+        <circle cx="550" cy="120" r="7"/>
+        <circle cx="620" cy="160" r="7"/>
+        <circle cx="620" cy="240" r="7"/>
+        <circle cx="550" cy="280" r="7"/>
+        <!-- atomy — substituenty -->
+        <circle cx="130" cy="120" r="5"/>
+        <circle cx="130" cy="280" r="5"/>
+        <circle cx="270" cy="50"  r="5"/>
+        <circle cx="410" cy="50"  r="5"/>
+        <circle cx="550" cy="50"  r="5"/>
+        <circle cx="690" cy="120" r="5"/>
+        <circle cx="690" cy="280" r="5"/>
+        <circle cx="270" cy="350" r="5"/>
+        <circle cx="410" cy="350" r="5"/>
+        <circle cx="550" cy="350" r="5"/>
+      </g>
+
+    </svg>
+  </div><!-- /hero-molecules -->
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">Diskusní blok — Mezioborový panel</div>
+    <div class="hero-orgs reveal d1">
+      Konference Pitná voda 2026 &nbsp;|&nbsp; Středa 3. června · závěr odpoledního bloku
+    </div>
+    <div class="hero-title reveal d2">MIKRO<span class="hl">POLUTANTY</span></div>
+    <div class="hero-tagline reveal d3">
+      Legislativa, analytická praxe a technologie — tři propojené pohledy<br>
+      na látky, které jsme donedávna nedokázali ani spolehlivě změřit.
+    </div>
+    <div class="hero-pillars reveal d3">
+      <span class="hero-pillar">I. Legislativa &amp; monitoring</span>
+      <span class="hero-pillar">II. Analytická praxe</span>
+      <span class="hero-pillar">III. Technologie &amp; ekonomika</span>
+    </div>
+    <div class="hero-meta reveal d4">
+      <div class="meta-chip">
+        <div class="meta-chip-label">Datum</div>
+        <div class="meta-chip-val">Středa 3. června 2026</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Čas</div>
+        <div class="meta-chip-val">16:15 – 17:00</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Místo</div>
+        <div class="meta-chip-val">Hotel Palcát, Tábor</div>
+      </div>
+      <div class="meta-chip">
+        <div class="meta-chip-label">Formát</div>
+        <div class="meta-chip-val">Přednášky + panel</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-bottom" style="background:var(--navy)">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" style="background:white">
+    <path fill="#1F3864" d="M0,48 L0,16 C180,40 360,0 540,20 C720,40 900,4 1080,20 C1260,36 1350,12 1440,20 L1440,48Z"/>
+  </svg>
+</div>
+
+<!-- STAT BAND -->
+<div class="stat-band">
+  <div class="stat-band-inner">
+    <div class="stat-big reveal">2026<span class="stat-unit"></span></div>
+    <div class="stat-text-block reveal d2">
+      <div class="stat-title">rok, kdy vstupují v platnost nové požadavky EU na monitoring PFAS v pitné vodě</div>
+      <div class="stat-body">
+        Recast Směrnice o pitné vodě (EU 2020/2184) zavazuje provozovatele sledovat PFAS
+        s limitní hodnotou <strong>0,1 μg/l</strong> pro 20 specifických látek a <strong>0,5 μg/l</strong> jako součtový limit pro všechny PFAS.
+        Jde o jednu z nejrozsáhlejších regulatorních změn v historii českého vodárenství —
+        a teprve první krok v rozšiřujícím se světě mikropolutantů.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE DIVIDER 2 -->
+<div style="background:var(--navy)">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" style="display:block">
+    <path fill="white" d="M0,0 L1440,0 L1440,32 C1260,12 1080,44 900,28 C720,12 540,44 360,28 C180,12 90,40 0,28 Z"/>
+  </svg>
+</div>
+
+<!-- CONTEXT SECTION -->
+<section class="section context-section">
+  <div class="section-inner">
+    <div class="section-label reveal">O čem hovoříme</div>
+    <h2 class="section-title reveal d1">Kontext a výzva</h2>
+    <div class="context-card reveal d2">
+      <div class="context-text">
+        Mikropolutanty představují heterogenní skupinu látek — pesticidy a jejich metabolity,
+        farmaceutické sloučeniny, průmyslová aditiva, PFAS — jejichž přítomnost ve vodních zdrojích
+        je z velké části <strong>důsledkem analytického pokroku</strong>: látky tam byly vždy,
+        ale nové metody je teprve nyní dokáží spolehlivě detekovat v koncentracích ng/l a nižších.
+        <br><br>
+        Tím se mění vše: legislativa musí reagovat na nové poznatky, laboratoře se musí přizpůsobit
+        stále nižším detekčním limitům a rozšiřujícím se sledovaným parametrům,
+        a provozovatelé stojí před otázkou, které <strong>technologie jsou účinné, dostupné a ekonomicky únosné</strong>.
+        A navíc — hodnocení zdravotních rizik musí brát v úvahu nejen individuální účinky,
+        ale i dosud málo prozkoumaný <em>„cocktail" efekt</em> směsí látek.
+      </div>
+      <div class="context-pills">
+        <span class="context-pill">PFAS</span>
+        <span class="context-pill">Pesticidy &amp; metabolity</span>
+        <span class="context-pill">Farmaceutika</span>
+        <span class="context-pill">Cocktail efekt</span>
+        <span class="context-pill">ng/l detekce</span>
+        <span class="context-pill">Zdravotní rizika</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM / PILÍŘE -->
+<section class="section program-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Struktura diskuse</div>
+    <h2 class="section-title reveal d1">Tři pilíře</h2>
+    <div class="prog-list reveal d2">
+
+      <div class="prog-item">
+        <div class="prog-num-col">I</div>
+        <div class="prog-body">
+          <div class="prog-tag">Legislativa &amp; monitoring</div>
+          <div class="prog-title">Vývoj legislativy a přístup k mikropolutantům</div>
+          <div class="prog-author">Vývoj za posledních ~15 let a výhled do budoucna</div>
+          <ul class="prog-topics">
+            <li>Rozšiřování seznamů sledovaných látek a snižování limitních hodnot — pevné seznamy vs. výběr na základě analýzy rizik</li>
+            <li>Jednotný vs. odlišný přístup pro povrchové a podzemní zdroje</li>
+            <li>Přístup institucí k výběru nových kontaminantů pro monitoring — ČHMÚ, státní podniky Povodí, SZÚ</li>
+            <li>Hodnocení zdravotních rizik: individuální účinky vs. cocktail efekt směsí látek</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prog-item">
+        <div class="prog-num-col">II</div>
+        <div class="prog-body">
+          <div class="prog-tag">Analytická praxe</div>
+          <div class="prog-title">Analýza vod a připravenost laboratoří</div>
+          <div class="prog-author">Rozšiřující se rozsah parametrů a klesající detekční limity</div>
+          <ul class="prog-topics">
+            <li>Připravenost analytických laboratoří na nové legislativní požadavky</li>
+            <li>Potřeba jednotného přístupu: legislativně zakotvený rozsah analýz, lepší orientace provozovatelů</li>
+            <li>Srovnatelnost výsledků a možnost meziregionálního srovnání dat</li>
+            <li>Dopad rozšiřujícího se monitoringu na cenu analýz</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prog-item">
+        <div class="prog-num-col">III</div>
+        <div class="prog-body">
+          <div class="prog-tag">Technologie &amp; ekonomika</div>
+          <div class="prog-title">Dostupné technologie a ekonomická náročnost</div>
+          <div class="prog-author">Aktuálně účinné technologie pro odstraňování mikropolutantů</div>
+          <ul class="prog-topics">
+            <li>Vhodnost jednotlivých technologií pro úpravu povrchových a podzemních vod</li>
+            <li>Investiční a provozní náklady — srovnání přístupů</li>
+            <li>Dlouhodobá udržitelnost a reálnost implementace v podmínkách českého vodárenství</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prog-item panel-item">
+        <div class="prog-num-col" style="font-size:14px;padding-top:28px;">▶</div>
+        <div class="prog-body">
+          <div class="prog-tag">Panelová diskuse</div>
+          <div class="prog-title">Otevřená diskuse panelistů s účastníky konference</div>
+          <div class="prog-author">Moderuje: Ing. Taťána Halešová · Waters</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PANELISTS -->
+<section class="section panel-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Účastníci diskuse</div>
+    <h2 class="section-title reveal d1">Panelisté</h2>
+    <div class="panelists-grid">
+
+      <div class="panelist-card reveal">
+        <div class="panelist-name">Mgr. Jiří Paul, MBA</div>
+        <div class="panelist-org">CzWA — Odborná skupina Vodárenství</div>
+      </div>
+
+      <div class="panelist-card reveal d1">
+        <div class="panelist-name">MUDr. František Kožíšek, CSc.</div>
+        <div class="panelist-org">Státní zdravotní ústav, Praha</div>
+      </div>
+
+      <div class="panelist-card reveal d2">
+        <div class="panelist-name">Ing. Radka Hušková</div>
+        <div class="panelist-org">PVK, a.s.</div>
+      </div>
+
+      <div class="panelist-card reveal d2">
+        <div class="panelist-name">RNDr. Marek Liška, Ph.D.</div>
+        <div class="panelist-org">Povodí Vltavy, s.p.</div>
+      </div>
+
+      <div class="panelist-card reveal d3">
+        <div class="panelist-name">Ing. Vít Kodeš, Ph.D.</div>
+        <div class="panelist-org">ČHMÚ — monitoring podzemních vod</div>
+      </div>
+
+      <div class="panelist-card reveal d3">
+        <div class="panelist-name">Ing. Pavel Dobiáš, Ph.D.</div>
+        <div class="panelist-org">ENVI-PUR, s.r.o. / W&amp;ET Team, České Budějovice</div>
+      </div>
+
+      <div class="panelist-card reveal d4">
+        <div class="panelist-name">Ing. Zdeňka Jedličková</div>
+        <div class="panelist-org">VAS, a.s.</div>
+      </div>
+
+      <div class="panelist-card moderator reveal d4">
+        <div class="panelist-role">Moderátorka</div>
+        <div class="panelist-name">Ing. Taťána Halešová</div>
+        <div class="panelist-org">Sr System Account Manager for LC-MS<br>Waters</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CORE MESSAGE -->
+<section class="message-section">
+  <div class="message-inner">
+    <div class="msg-lead reveal">
+      Nestačí látku zakázat — musíme ji umět změřit.<br>
+      Nestačí ji změřit — musíme ji umět odstranit.<br>
+      Nestačí ji odstranit — musíme vědět, co přijde příště.
+    </div>
+    <div class="msg-divider reveal d1"></div>
+    <div class="msg-statement reveal d2">
+      Problém mikropolutantů<br>
+      nevzniká tím, že látky přibývají —<br>
+      ale tím, že je <em>konečně vidíme.</em>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-brand">Pitná voda 2026</div>
+    <div class="footer-sub">
+      1.–4. června 2026 · Hotel Palcát, Tábor<br>
+      Pořadatel: ENVI-PUR, s.r.o. a W&amp;ET Team, České Budějovice
+    </div>
+  </div>
+  <div class="footer-right">
+    Diskusní blok v rámci konference Pitná voda 2026<br>
+    Středa 3. 6. · 16:15–17:00<br>
+    <a class="footer-link" href="https://konference-pitnavoda.cz" target="_blank" rel="noopener noreferrer">konference-pitnavoda.cz</a>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
