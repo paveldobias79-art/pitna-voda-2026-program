@@ -398,6 +398,13 @@ span.badge-inactive {
 /* Keynote */
 .row-keynote td { background: var(--cyan-lt); padding: 13px 18px; }
 .row-keynote .cell-time { text-align: center; vertical-align: middle; }
+.pres-keynote-label {
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--navy-mid);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
 
 /* Regular presentation */
 .row-pres td { background: white; padding: 11px 18px; }
@@ -405,6 +412,13 @@ span.badge-inactive {
 
 /* Company presentation */
 .row-firmy td { background: var(--peach); padding: 11px 18px; }
+.pres-firmy-label {
+  font-size: 11.5px;
+  font-style: italic;
+  color: #C96830;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
 
 /* Green / discussion rows */
 .row-green td  { background: var(--green); padding: 11px 18px; }
@@ -455,6 +469,8 @@ tr:last-child td { border-bottom: none; }
 .cell-content { font-size: 13.5px; line-height: 1.45; }
 
 .pres-title  { font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.row-keynote .pres-title { font-weight: 700; }
+.row-firmy   .pres-title { font-weight: 400; }
 .pres-authors {
   font-size: 11.5px;
   color: var(--muted);
@@ -703,7 +719,8 @@ tr:last-child td { border-bottom: none; }
 <tr class="row-day"><td class="cell-time"></td><td>PONDĚLÍ&ensp;1. 6. 2026&ensp;—&ensp;Neformální zahájení konference</td></tr>
 <tr class="row-util"><td class="cell-time">15:00</td><td class="cell-content"><span class="util-label">Registrace účastníků</span></td></tr>
 <tr class="row-keynote"><td class="cell-time">17:00–17:45</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Adaptace vodárenství na měnící se svět</div>
+  <div class="pres-keynote-label"><em>Vyzvaná přednáška</em></div>
+  <div class="pres-title">Adaptace vodárenství na měnící se svět</div>
   <div class="pres-authors">Ing. Vilém Žák (SOVAK ČR)</div>
 </td></tr>
 <tr class="row-util"><td class="cell-time">17:45–18:15</td><td class="cell-content"><span class="util-label">Diskuse k tématu přednášky</span></td></tr>
@@ -717,7 +734,8 @@ tr:last-child td { border-bottom: none; }
 <tr class="row-util"><td class="cell-time">7:30</td><td class="cell-content"><span class="util-label">Registrace účastníků</span></td></tr>
 <tr class="row-util"><td class="cell-time">9:00–9:30</td><td class="cell-content"><span class="util-label">Slavnostní zahájení konference</span></td></tr>
 <tr class="row-keynote"><td class="cell-time">9:30–10:20</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Koagulace při úpravě vod — 50 let výzkumu pro praxi</div>
+  <div class="pres-keynote-label"><em>Vyzvaná přednáška</em></div>
+  <div class="pres-title">Koagulace při úpravě vod — 50 let výzkumu pro praxi</div>
   <div class="pres-authors">doc. Ing. Petr Dolejš, CSc. (W&amp;ET Team, České Budějovice)</div>
 </td></tr>
 <tr class="row-kdisc"><td class="cell-time">10:20–10:30</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
@@ -770,7 +788,8 @@ tr:last-child td { border-bottom: none; }
 </td></tr>
 <tr class="row-bdisc"><td class="cell-time">14:45–15:00</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
 <tr class="row-firmy"><td class="cell-time">15:00–15:10</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Technologie pro budoucnost pitné vody</div>
+  <div class="pres-firmy-label"><em>Firemní prezentace</em></div>
+  <div class="pres-title">Technologie pro budoucnost pitné vody</div>
   <div class="pres-authors">Ing. Ladislav Žilík — Endress+Hauser Czech</div>
 </td></tr>
 <tr class="row-section"><td class="cell-time"></td><td>Technologie úpravy vody — nové poznatky a postupy</td></tr>
@@ -800,7 +819,8 @@ tr:last-child td { border-bottom: none; }
 </td></tr>
 <tr class="row-bdisc"><td class="cell-time">16:40–16:55</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
 <tr class="row-firmy"><td class="cell-time">16:55–17:05</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Monitorovacie systémy ECM s využitím sond Badger Meter pre úpravne pitnej vody</div>
+  <div class="pres-firmy-label"><em>Firemní prezentace</em></div>
+  <div class="pres-title">Monitorovacie systémy ECM s využitím sond Badger Meter pre úpravne pitnej vody</div>
   <div class="pres-authors">ECM ECO Monitoring</div>
 </td></tr>
 <tr class="row-section"><td class="cell-time"></td><td>Společenský večer</td></tr>
@@ -818,7 +838,8 @@ tr:last-child td { border-bottom: none; }
 <table class="program-table">
 <tr class="row-day"><td class="cell-time"></td><td>STŘEDA&ensp;3. 6. 2026&ensp;—&ensp;2. den konference</td></tr>
 <tr class="row-keynote"><td class="cell-time">8:30–9:10</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Hydrochemie úpravy vody: tradiční principy a nové výzvy</div>
+  <div class="pres-keynote-label"><em>Vyzvaná přednáška</em></div>
+  <div class="pres-title">Hydrochemie úpravy vody: tradiční principy a nové výzvy</div>
   <div class="pres-authors">doc. RNDr. Martin Pivokonský, Ph.D. (Hydrologický ústav AV ČR / Floc4U)</div>
 </td></tr>
 <tr class="row-kdisc"><td class="cell-time">9:10–9:20</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
@@ -934,7 +955,8 @@ tr:last-child td { border-bottom: none; }
 <table class="program-table">
 <tr class="row-day"><td class="cell-time"></td><td>ČTVRTEK&ensp;4. 6. 2026&ensp;—&ensp;3. (závěrečný) den konference</td></tr>
 <tr class="row-keynote"><td class="cell-time">8:30–9:10</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-keynote">Zvaná</span>Voda propojuje</div>
+  <div class="pres-keynote-label"><em>Vyzvaná přednáška</em></div>
+  <div class="pres-title">Voda propojuje</div>
   <div class="pres-authors">RNDr. Jindřich Duras, Ph.D. (Povodí Vltavy, s.p.)</div>
 </td></tr>
 <tr class="row-kdisc"><td class="cell-time">9:10–9:20</td><td class="cell-content"><span class="disc-kdisc">Diskuse k přednášce</span></td></tr>
@@ -967,15 +989,18 @@ tr:last-child td { border-bottom: none; }
 </td></tr>
 <tr class="row-bdisc"><td class="cell-time">11:05–11:10</td><td class="cell-content"><span class="disc-label">Diskuse k bloku</span></td></tr>
 <tr class="row-firmy"><td class="cell-time">11:10–11:20</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Nová generace sond volného chloru Pyxis ST</div>
+  <div class="pres-firmy-label"><em>Firemní prezentace</em></div>
+  <div class="pres-title">Nová generace sond volného chloru Pyxis ST</div>
   <div class="pres-authors">Ing. Tomáš Chvátal — Katko s.r.o.</div>
 </td></tr>
 <tr class="row-firmy"><td class="cell-time">11:20–11:30</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Elektrická infrastruktura ve vodárenství — audity a modernizační potenciál</div>
+  <div class="pres-firmy-label"><em>Firemní prezentace</em></div>
+  <div class="pres-title">Elektrická infrastruktura ve vodárenství — audity a modernizační potenciál</div>
   <div class="pres-authors">Ing. Adam Dolejší — Schneider Electric CZ, s.r.o.</div>
 </td></tr>
 <tr class="row-firmy"><td class="cell-time">11:30–11:40</td><td class="cell-content">
-  <div class="pres-title"><span class="pres-tag tag-firmy">Firemní</span>Současné trendy v lokální filtraci pitné vody</div>
+  <div class="pres-firmy-label"><em>Firemní prezentace</em></div>
+  <div class="pres-title">Současné trendy v lokální filtraci pitné vody</div>
   <div class="pres-authors">Ing. Dana Feferlová — Filbec</div>
 </td></tr>
 <tr class="row-section"><td class="cell-time"></td><td>Závěr konference</td></tr>
